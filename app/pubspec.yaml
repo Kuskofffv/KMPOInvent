@@ -1,0 +1,76 @@
+name: brigantina_invent
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  common: any
+  core: any
+
+  cupertino_icons: ^1.0.8
+  path_provider: ^2.1.4
+  qr_flutter: ^4.1.0
+  barcode_scan2: ^4.3.3
+  provider: ^6.1.2
+  fluttertoast: ^8.2.8
+  share_plus: ^10.0.2
+  intl: ^0.19.0
+  syncfusion_flutter_xlsio: ^27.1.50
+  open_file: ^3.5.6
+  file_picker: ^8.1.2
+  excel: ^3.0.0
+  parse_server_sdk: any
+  parse_server_sdk_flutter: any
+  toastification: ^2.1.0
+  flutter_sticky_header: ^0.6.5
+
+dependency_overrides:
+  #xml: ^5.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/icona.png
+    - assets/images/1.png
+    - assets/images/2.png
+    - assets/images/3.png
+    - assets/images/4.png
+    - assets/images/5.png
+    - assets/images/6.png
+    - assets/images/7.png
+    - assets/images/8.png
+    - assets/images/9.png
+    - assets/images/10.png
+    - assets/images/11.png
+    - assets/images/12.png
+    - assets/images/13.png
+
+  fonts:
+    - family: Roboto   
+      fonts:
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+          style: normal
+    - family: Oswald
+      fonts:
+        - asset: assets/fonts/Oswald-Regular.ttf
+          weight: 300
+          style: normal

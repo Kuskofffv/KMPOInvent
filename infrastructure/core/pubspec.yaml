@@ -1,0 +1,53 @@
+name: core
+description: A core package
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+    
+  common: any
+
+  worker_manager: any
+  dynamic_util: any
+
+  # Misc
+  package_info_plus: ^8.0.0
+  device_info_plus: ^9.0.3
+  uuid: ^4.3.3
+
+  toastification: any
+  share_plus: ^10.0.1
+
+  # Util
+  edit_distance: ^0.5.0-nullsafety.0
+  timeago: ^3.3.0
+
+
+dev_dependencies:
+  #flutter_test:
+  #  sdk: flutter
+
+  # Code generators
+  #build_runner: ^2.4.7
+  #freezed: ^2.4.6
+  #injectable_generator: any
+  #json_serializable: 6.8.0
+
+flutter_gen:
+  output: lib/gen/
+  integrations:
+    flutter_svg: true
+  assets:
+    outputs:
+      package_parameter_enabled: true
+      class_name: CoreAssets

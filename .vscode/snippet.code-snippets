@@ -1,0 +1,36 @@
+{
+	"Operation": {
+		"prefix": "my_op",
+		"body": [
+		  "final result = await AppRouter.operationWithToast(operation: () {",
+		  "  return Future.value(0);",
+		  "});",
+		  "",
+		  "if(result != null) {",
+		  "",
+		  "}"
+		],
+		"description": "AppRouter Operation"
+	},
+	"Api": {
+		"prefix": "my_api",
+		"body": [
+		  "final api = Api.read(context);"
+		],
+		"description": "Api"
+	},
+	"Loader": {
+		"prefix": "my_lo",
+		"body": [
+		  "final _loaderController = LoaderController();"
+		],
+		"description": "Loader"
+	},
+	"PaginatedSliverController": {
+		"prefix": "my_li",
+		"body": [
+		  "final _listController = PaginatedSliverController<Data>();"
+		],
+		"description": "PaginatedSliverController"
+	}
+}

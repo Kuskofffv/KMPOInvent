@@ -1,0 +1,49 @@
+# Melos settings and scripts
+name: workspace
+
+versioning:
+  mode: independent
+
+packages:
+  - app
+  - infrastructure/**
+  - utils/**
+
+command:
+  bootstrap:
+    hooks:
+      pre: dart run script/deps_fixer.dart
+
+scripts:
+  fix:
+    run: dart run deps_fixer.dart
+    description: Fix dependencies according common_deps.yaml
+  clean:
+    run: melos exec -c 6 -- flutter clean && melos run install
+    description: Clean Flutter packages in this project and run bootstrap
+  # Upload сервера
+  su:
+    run: sshpass -p "81pfgx15!" rsync -u -avzr -e 'ssh' server/ root@82.146.47.140:/root/parse
+    description: Upload server
+  # Запуск сервера
+  r:
+    run: sshpass -p "81pfgx15!" ssh root@82.146.47.140 "cd parse; npm start"
+    description: Run release server
+  # Установка зависимостей
+  i:
+    run: sshpass -p "81pfgx15!" ssh root@82.146.47.140 "cd parse; npm install"
+    description: npm install
+  # Upload server + запуск
+  sur:
+    run: melos su; melos r
+    description: Upload server + restart server
+  # Upload server + зависимости + запуск
+  suir:
+    run: melos su; melos i; melos r
+    description: Upload server + install + restart server
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=2.0.0"
+
+sdkPath: .fvm/flutter_sdk

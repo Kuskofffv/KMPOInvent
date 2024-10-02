@@ -1,0 +1,55 @@
+{
+  "name": "semesterrus",
+  "version": "1.3.1",
+  "description": "SemesterRus server",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "TESTING=true nyc jasmine",
+    "lint": "eslint --cache ./cloud && eslint --cache index.js && eslint --cache ./spec",
+    "lint-fix": "eslint --cache --fix ./cloud && eslint --cache --fix index.js && eslint --cache --fix ./spec",
+    "prettier": "prettier --write '{cloud,spec}/{**/*,*}.js' 'index.js'",
+    "start": "pm2 kill; pm2 start index.js -i max --max-memory-restart 500M",
+    "start2": "killall node; node index.js",
+    "test": "mongodb-runner start && TESTING=true jasmine",
+    "watch": "nodemon index.js"
+  },
+  "dependencies": {
+    "axios": "1.6.0",
+    "express": "^4.19.2",
+    "parse": "5.3.0",
+    "parse-dashboard": "^5.4.0",
+    "parse-server": "7.2.0",
+    "sharp": "^0.33.4",
+    "body-parser": "1.20.2",
+    "uuid": "10.0.0",
+    "nodemailer": "6.9.14",
+    "dotenv": "^16.3.1",
+    "openai": "^4.53.0",
+    "fluent-ffmpeg": "2.1.3",
+    "generate-password": "1.7.1",
+    "diff": "5.2.0",
+    "redis": "4.7.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@babel/eslint-parser": "7.21.3",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/commit-analyzer": "10.0.0",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "9.0.2",
+    "@semantic-release/npm": "^12.0.1",
+    "@semantic-release/release-notes-generator": "11.0.2",
+    "eslint": "8.38.0",
+    "jasmine": "4.6.0",
+    "mongodb-runner": "^5.6.2",
+    "nodemon": "^3.1.4",
+    "nyc": "15.1.0",
+    "prettier": "2.8.7",
+    "semantic-release": "^24.0.0",
+    "socket.io": "4.7.5",
+    "os": "0.1.2"
+  },
+  "engines": {
+    "node": ">=20 <23"
+  }
+}

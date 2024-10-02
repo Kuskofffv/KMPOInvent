@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Stats</title>
+  <script src="socket.io.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .stat {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Server Statistics</h1>
+  <div class="stat">Free Memory: <span id="freeMemory"></span></div>
+  <div class="stat">Total Memory: <span id="totalMemory"></span></div>
+  <div class="stat">Load Average: <span id="loadAverage"></span></div>
+  <div class="stat">Uptime: <span id="uptime"></span></div>
+
+  <script>
+    const socket = io();
+
+    socket.on('stats', (stats) => {
+      document.getElementById('freeMemory').textContent = stats.freeMemory;
+      document.getElementById('totalMemory').textContent = stats.totalMemory;
+      document.getElementById('loadAverage').textContent = stats.loadAverage.join(', ');
+      document.getElementById('uptime').textContent = stats.uptime;
+    });
+  </script>
+</body>
+</html>

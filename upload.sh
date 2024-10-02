@@ -1,0 +1,1 @@
+sshpass -p "81pfgx15!" rsync -u -avzr -e 'ssh' server/ root@82.146.47.140:/root/parse

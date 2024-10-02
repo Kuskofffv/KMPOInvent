@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: parse_server_sdk
+dependency_overrides:
+  parse_server_sdk:
+    path: ../dart
