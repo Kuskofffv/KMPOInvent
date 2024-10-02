@@ -1,7 +1,7 @@
 import 'package:brigantina_invent/domain/const.dart';
 import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/services/auth.dart';
 import 'package:brigantina_invent/screens/auth/landing_screen.dart';
+import 'package:brigantina_invent/services/auth.dart';
 import 'package:brigantina_invent/utils/adaptation_util.dart';
 import 'package:brigantina_invent/widget/adaptation.dart';
 import 'package:core/util/routing/router.dart';
@@ -15,7 +15,8 @@ import 'package:toastification/toastification.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Parse().initialize(
     "application",
     "http://82.146.47.140:1339/parse/api/",
@@ -24,10 +25,6 @@ Future<void> main() async {
     liveQueryUrl: "ws://82.146.47.140:1339/parse/api/",
     autoSendSessionId: true,
   );
-
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
   runApp(const MyApp());
 }
 
@@ -85,7 +82,7 @@ class _MyAppState extends State<MyApp> {
             child: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               child: MaterialApp(
-                title: 'INVENT',
+                title: 'KMPOInvent',
                 navigatorKey: SRRouter.mainNavigatorKey,
                 locale: const Locale.fromSubtags(languageCode: "ru"),
                 localizationsDelegates: const [

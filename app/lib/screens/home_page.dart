@@ -37,7 +37,7 @@ class _MyStateHomePage extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Invent',
+            'KMPOInvent',
           ),
           actions: <Widget>[
             ElevatedButton.icon(

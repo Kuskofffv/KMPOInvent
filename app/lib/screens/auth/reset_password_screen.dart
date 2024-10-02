@@ -41,7 +41,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               const Padding(
                   padding: EdgeInsets.only(top: 30, bottom: 20),
                   child: Text(
-                    'INVENT',
+                    'KMPOInvent',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 32,

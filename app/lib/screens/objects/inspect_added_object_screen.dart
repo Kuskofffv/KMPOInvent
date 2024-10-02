@@ -1,12 +1,7 @@
-import 'dart:io';
-import 'dart:ui';
-import 'package:core/util/globals.dart';
+import 'package:brigantina_invent/services/qr.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:share_plus/share_plus.dart';
 
 class InspectAddedObjectScreen extends StatefulWidget {
   final String qrData;
@@ -22,6 +17,7 @@ class InspectAddedObjectScreen extends StatefulWidget {
 
 class _InspectAddedObjectScreenState extends State<InspectAddedObjectScreen> {
   final qrKey = GlobalKey();
+  QrCardSize _qrSize = QrCardSize.medium;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +43,7 @@ class _InspectAddedObjectScreenState extends State<InspectAddedObjectScreen> {
                     child: Column(
                       children: [
                         const Text(
-                          'INVENT',
+                          'KMPOInvent',
                           style: TextStyle(
                               fontFamily: 'Oswald',
                               fontSize: 18,
@@ -77,35 +73,44 @@ class _InspectAddedObjectScreenState extends State<InspectAddedObjectScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    IntrinsicHeight(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 5, 16, 0),
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                            listTileTheme: const ListTileThemeData(
+                              horizontalTitleGap: 0,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              const Expanded(
+                                  child: Text(
+                                "Размер: ",
+                                style: TextStyle(fontSize: 16),
+                              )),
+                              ...QrCardSize.values.map((size) {
+                                return Expanded(
+                                  child: RadioListTile<QrCardSize>(
+                                      contentPadding: EdgeInsets.zero,
+                                      value: size,
+                                      groupValue: _qrSize,
+                                      title: Text(size.title),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _qrSize = value!;
+                                        });
+                                      }),
+                                );
+                              }).toList(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                     ElevatedButton(
                       onPressed: () async {
-                        try {
-                          final boundary = qrKey.currentContext!
-                              .findRenderObject()! as RenderRepaintBoundary;
-                          //captures qr image
-                          final image = await boundary.toImage();
-                          final byteData = await image.toByteData(
-                              format: ImageByteFormat.png);
-                          final pngBytes = byteData!.buffer.asUint8List();
-                          //app directory for storing images.
-                          final appDir =
-                              await getApplicationDocumentsDirectory();
-                          //current time
-                          final datetime = DateTime.now();
-                          //qr image file creation
-                          final file =
-                              await File('${appDir.path}/$datetime.png')
-                                  .create();
-                          //appending data
-                          await file.writeAsBytes(pngBytes);
-                          //Shares QR image
-                          await Share.shareXFiles(
-                            [XFile(file.path, mimeType: "image/png")],
-                            text: "Лови QR-код",
-                          );
-                        } catch (e, s) {
-                          logger.e(e.toString(), error: e, stackTrace: s);
-                        }
+                        await QrUtil.share([widget.qrData], _qrSize);
                       },
                       child: const Text(
                         "Сохранить QR-Code",

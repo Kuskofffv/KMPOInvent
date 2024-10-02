@@ -8,9 +8,9 @@
     <uses-permission android:name="android.Manifest.permission.READ_EXTERNAL_STORAGE"/>
 
    <application
-        android:label="INVENT"
+        android:label="KMPO Invent"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

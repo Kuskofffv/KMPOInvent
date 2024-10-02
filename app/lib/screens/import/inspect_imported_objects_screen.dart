@@ -57,7 +57,7 @@ class _InspectImportedObjectsScreenState
                       child: Column(
                         children: [
                           const Text(
-                            'INVENT',
+                            'KMPOInvent',
                             style: TextStyle(
                                 fontFamily: 'Oswald',
                                 fontSize: 18,

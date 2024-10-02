@@ -74,7 +74,7 @@ export const config = {
     options: {
       //"6kbhh4pmrzs3f7e8rh7i8ugzs31ig47cop76i6de",//
       apiKey: "6k411zoazdano1qqxrturuunaf8t196wffidrrby",
-      senderName: 'Invent',
+      senderName: 'KMPOInvent',
       senderEmail: 'new@kfv900.ru'
     }
   }

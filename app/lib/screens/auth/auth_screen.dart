@@ -31,7 +31,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
           padding: EdgeInsets.only(top: 30, bottom: 20),
           child: Align(
               child: Text(
-            'INVENT',
+            'KMPOInvent',
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,

@@ -1,5 +1,5 @@
 import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/invent/select_objects_invent_screen.dart';
+import 'package:brigantina_invent/screens/invent/select_mol_invent_screen.dart';
 import 'package:brigantina_invent/utils/parse_util.dart';
 import 'package:brigantina_invent/widget/loader_widget.dart';
 import 'package:core/util/routing/router.dart';
@@ -59,7 +59,7 @@ class _InventStartScreenState extends State<InventStartScreen> {
                       child: Padding(
                         padding: EdgeInsets.all(16),
                         child: Text(
-                          "Кто будет проводить инвентаризацию?",
+                          "Кто будет проводить инвентаризацию (комиссия)?",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
@@ -93,9 +93,9 @@ class _InventStartScreenState extends State<InventStartScreen> {
                         return;
                       }
                       SRRouter.pushReplacement(
-                          context, SelectObjectsInventScreen(names: _checked));
+                          context, SelectMolInventScreen(names: _checked));
                     },
-                    child: const Text("Выбрать объекты")),
+                    child: const Text("Выбрать")),
               )
             ],
           );

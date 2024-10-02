@@ -2,12 +2,15 @@ import 'package:brigantina_invent/screens/invent/perform_invent_screen.dart';
 import 'package:brigantina_invent/utils/parse_util.dart';
 import 'package:brigantina_invent/widget/loader_widget.dart';
 import 'package:core/core_dependencies.dart';
+import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
 
 class SelectObjectsInventScreen extends StatefulWidget {
   final List<String> names;
-  const SelectObjectsInventScreen({required this.names, Key? key})
+  final List<String> mols;
+  const SelectObjectsInventScreen(
+      {required this.names, required this.mols, Key? key})
       : super(key: key);
 
   @override
@@ -49,9 +52,12 @@ class _SelectObjectsInventScreenState extends State<SelectObjectsInventScreen> {
         ),
         body: LoaderWidget(operation: () async {
           final data = await parseFunc("objects");
-          return data.dynamicListOpt("items") ?? <DynamicModel>[];
+          final list = data.dynamicListOpt("items") ?? <DynamicModel>[];
+          return list
+              .filter((e) => widget.mols.contains(e.stringOpt('custodian')));
         }, onResult: (items) {
           _items = items;
+          _checked.addAll(items);
         }, builder: (context, snapshot) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

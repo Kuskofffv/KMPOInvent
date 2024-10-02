@@ -1,3 +1,4 @@
+import 'package:brigantina_invent/screens/objects/select_mol_print_screen.dart';
 import 'package:brigantina_invent/screens/scan/scan_main_screen.dart';
 import 'package:brigantina_invent/utils/parse_util.dart';
 import 'package:brigantina_invent/widget/loader_widget.dart';
@@ -28,6 +29,13 @@ class _AllObjectsScreenState extends State<AllObjectsScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  SRRouter.push(context, const SelectMolPrintScreen());
+                },
+                icon: const Icon(Icons.print_outlined))
+          ],
         ),
         body: LoaderWidget(operation: () async {
           final data = await parseFunc("objects");

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:brigantina_invent/domain/user.dart';
+import 'package:brigantina_invent/screens/scan/scan_info_screen.dart';
 import 'package:brigantina_invent/utils/date.dart';
 import 'package:brigantina_invent/utils/util.dart';
 import 'package:brigantina_invent/widget/loader_widget.dart';
@@ -14,6 +15,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'end_invent_screen.dart';
 
@@ -30,10 +32,12 @@ class InventScreen extends StatefulWidget {
 
 class _InventScreenState extends State<InventScreen> {
   int count = 0;
-  Map<String, dynamic> objectCounts = {};
+  Map<String, int> objectCounts = {};
   Map<String, Color?> objectColors = {};
   List<dynamic> objects = [];
   late final DateTime _startDate;
+  List<DynamicModel>? _items;
+  final _controller = AutoScrollController();
 
   @override
   void initState() {
@@ -145,9 +149,144 @@ class _InventScreenState extends State<InventScreen> {
             ),
           ],
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: SizedBox(
+          width: 70,
+          height: 70,
+          child: FloatingActionButton(
+            onPressed: () async {
+              final result = await BarcodeScanner.scan(
+                options: const ScanOptions(
+                  strings: {
+                    'cancel': 'Отмена',
+                    'flash_on': 'Включить фонарик',
+                    'flash_off': 'Выключить фонарик',
+                  },
+                ),
+              );
+
+              if (result.rawContent == "") {
+                return;
+              }
+
+              final item = _items?.firstWhereOrNull(
+                  (e) => e.stringOpt("number") == result.rawContent);
+
+              if (item == null) {
+                unawaited(Fluttertoast.showToast(
+                    msg: "Объект не найден",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16));
+                return;
+              }
+
+              unawaited(_controller.scrollToIndex(_items!.indexOf(item),
+                  preferPosition: AutoScrollPosition.begin));
+
+              // if (result.rawContent != number) {
+              //   setState(() {
+              //     if (!objectCounts.containsKey(number)) {
+              //       objectCounts[number] = 0;
+              //     }
+              //     objectColors[number] = Colors.red;
+              //   });
+              //   unawaited(Fluttertoast.showToast(
+              //       msg: "Вы отсканировали не тот QR-Code",
+              //       toastLength: Toast.LENGTH_SHORT,
+              //       gravity: ToastGravity.BOTTOM,
+              //       timeInSecForIosWeb: 3,
+              //       backgroundColor: Colors.red,
+              //       textColor: Colors.white,
+              //       fontSize: 16));
+              //   return;
+              // }
+
+              final TextEditingController countField =
+                  TextEditingController(text: "1");
+
+              final value = await showDialog<int>(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(result.rawContent),
+                    content: Row(
+                      children: <Widget>[
+                        Expanded(
+                            child: TextField(
+                          controller: countField,
+                          autofocus: true,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          onSubmitted: (value) {
+                            Navigator.of(context)
+                                .pop(countField.text.toIntOrNull());
+                          },
+                          decoration: const InputDecoration(
+                              labelText: 'Кол-во', hintText: '10'),
+                        ))
+                      ],
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('Ок'),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pop(countField.text.toIntOrNull());
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              if (value == null) {
+                return;
+              }
+
+              final count = item.intOpt("count") ?? 0;
+
+              final scanned = (objectCounts[result.rawContent] ?? 0) + value;
+
+              if (scanned >= count) {
+                setState(() {
+                  if (objectCounts.containsKey(result.rawContent)) {
+                    objectCounts.remove(result.rawContent);
+                  }
+                  objectColors[result.rawContent] = Colors.green;
+                });
+              } else {
+                setState(() {
+                  objectCounts[result.rawContent] = scanned;
+                  objectColors[result.rawContent] = Colors.red;
+                });
+                unawaited(Fluttertoast.showToast(
+                    msg:
+                        "Разница на ${count - scanned} ${Intl.plural(count - value, one: "позицию", few: "позиции", other: "позиций")}",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16));
+              }
+            },
+            child: const Icon(
+              Icons.qr_code_2_outlined,
+              size: 32,
+              color: Colors.white,
+            ),
+          ),
+        ),
         body: LoaderWidget(operation: () async {
           return widget.objects;
         }, onResult: (list) {
+          _items = list;
           for (final item in list) {
             final number = item.stringOpt("number") ?? "";
             if (objectColors[number] == null) {
@@ -159,7 +298,8 @@ class _InventScreenState extends State<InventScreen> {
         }, builder: (context, snapshot) {
           final list = snapshot.data;
           return ListView.builder(
-              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+              controller: _controller,
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 100),
               itemCount: list.length,
               itemBuilder: (context, index) {
                 final item = list[index];
@@ -167,127 +307,41 @@ class _InventScreenState extends State<InventScreen> {
                 final number = item.stringOpt("number") ?? "";
                 final name = item.stringOpt("name") ?? "";
                 final place = item.stringOpt("place");
+                final count = item.intOpt("count");
 
                 final createdAt =
                     DateFormatUtil.dateFromStr(item.stringOpt("createdAt"));
                 final createdAtStr = DateFormatUtil.strFromDate(createdAt,
                     formatter: "dd.MM.yyyy HH:mm");
 
-                return Card(
-                  color: objectColors[number],
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.qr_code_outlined,
-                      color: Colors.white,
+                return AutoScrollTag(
+                  key: ValueKey(index),
+                  controller: _controller,
+                  index: index,
+                  child: Card(
+                    color: objectColors[number],
+                    child: ListTile(
+                      // leading: const Icon(
+                      //   Icons.qr_code_outlined,
+                      //   color: Colors.white,
+                      // ),
+                      // trailing: const Icon(
+                      //   Icons.camera_alt,
+                      //   color: Colors.white,
+                      // ),
+                      title: Text(
+                        '$number\n$name${place != null ? "\n$place" : ""}\n$createdAtStr\nКол-во: $count${(objectCounts[number] ?? 0) != 0 ? "\n\nПросканированно: ${objectCounts[number]}" : ""}',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      // subtitle: Text(
+                      //   '$place - $name ($createdAtStr)',
+                      //   style: const TextStyle(color: Colors.white),
+                      // ),
+                      onTap: () async {
+                        await SRRouter.push(
+                            context, ScanInfoDynamicScreen(data: item));
+                      },
                     ),
-                    trailing: const Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      '$number\n$name\n${place != null ? "\n$place" : ""}\n$createdAtStr',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    // subtitle: Text(
-                    //   '$place - $name ($createdAtStr)',
-                    //   style: const TextStyle(color: Colors.white),
-                    // ),
-                    onTap: () async {
-                      final result = await BarcodeScanner.scan(
-                        options: const ScanOptions(
-                          strings: {
-                            'cancel': 'Отмена',
-                            'flash_on': 'Включить фонарик',
-                            'flash_off': 'Выключить фонарик',
-                          },
-                        ),
-                      );
-
-                      if (result.rawContent == "") {
-                        return;
-                      }
-
-                      if (result.rawContent != number) {
-                        setState(() {
-                          if (!objectCounts.containsKey(number)) {
-                            objectCounts[number] = 0;
-                          }
-                          objectColors[number] = Colors.red;
-                        });
-                        unawaited(Fluttertoast.showToast(
-                            msg: "Вы отсканировали не тот QR-Code",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 3,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16));
-                        return;
-                      }
-
-                      final TextEditingController countField =
-                          TextEditingController(text: "1");
-
-                      final value = await showDialog<int>(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Введите количество'),
-                            content: Row(
-                              children: <Widget>[
-                                Expanded(
-                                    child: TextField(
-                                  controller: countField,
-                                  autofocus: true,
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  decoration: const InputDecoration(
-                                      labelText: 'Кол-во', hintText: '10'),
-                                ))
-                              ],
-                            ),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                child: const Text('Ок'),
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pop(countField.text.toIntOrNull());
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-
-                      if (value == null) {
-                        return;
-                      }
-
-                      if (value >= count) {
-                        setState(() {
-                          if (objectCounts.containsKey(number)) {
-                            objectCounts.remove(number);
-                          }
-                          objectColors[number] = Colors.green;
-                        });
-                      } else {
-                        setState(() {
-                          objectCounts[number] = value;
-                          objectColors[number] = Colors.red;
-                        });
-                        unawaited(Fluttertoast.showToast(
-                            msg:
-                                "Разница на ${count - value} ${Intl.plural(count - value, one: "позицию", few: "позиции", other: "позиций")}",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16));
-                      }
-                    },
                   ),
                 );
               });
