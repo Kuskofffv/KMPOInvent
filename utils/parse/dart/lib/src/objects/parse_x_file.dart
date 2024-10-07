@@ -1,3 +1,5 @@
+// ignore_for_file: cast_nullable_to_non_nullable
+
 part of '../../parse_server_sdk.dart';
 
 class ParseXFile extends ParseFileBase {

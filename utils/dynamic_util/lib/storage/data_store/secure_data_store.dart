@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:core/core_dependencies.dart';
 import 'package:core/util/extension/extensions.dart';
+import 'package:core/util/worker_manager/worker_manager.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'data_store.dart';

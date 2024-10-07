@@ -102,6 +102,7 @@ Future<ParseResponse> batchRequest(
 }
 
 Stream<T> _createStreamError<T>(Object error) async* {
+  // ignore: only_throw_errors
   throw error;
 }
 
@@ -116,14 +117,14 @@ List removeDuplicateParseObjectByObjectId(Iterable iterable) {
         (previous, element) => element,
       );
 
-  list.removeWhere(
-    (e) {
-      return e is ParseObject &&
-          foldedGroupedByObjectId.keys.contains(e.objectId);
-    },
-  );
-
-  list.addAll(foldedGroupedByObjectId.values);
+  list
+    ..removeWhere(
+      (e) {
+        return e is ParseObject &&
+            foldedGroupedByObjectId.keys.contains(e.objectId);
+      },
+    )
+    ..addAll(foldedGroupedByObjectId.values);
 
   return list;
 }
@@ -133,7 +134,8 @@ Future<bool> checkObjectsExistForEventually() async {
   // preparation ParseCoreData
   final CoreStore coreStore = ParseCoreData().getStore();
 
-  List<String>? listSaves = await coreStore.getStringList(keyParseStoreObjects);
+  final List<String>? listSaves =
+      await coreStore.getStringList(keyParseStoreObjects);
 
   if (listSaves != null) {
     if (listSaves.isNotEmpty) {
@@ -141,7 +143,7 @@ Future<bool> checkObjectsExistForEventually() async {
     }
   }
 
-  List<String>? listDeletes =
+  final List<String>? listDeletes =
       await coreStore.getStringList(keyParseStoreDeletes);
 
   if (listDeletes != null) {
@@ -157,7 +159,9 @@ Future<bool> checkObjectsExistForEventually() async {
 bool _inSubmitEventually = false;
 
 Future<void> checkForSubmitEventually() async {
-  if (_inSubmitEventually) return;
+  if (_inSubmitEventually) {
+    return;
+  }
 
   if (Parse.objectsExistForEventually) {
     _inSubmitEventually = true;

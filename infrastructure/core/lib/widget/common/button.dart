@@ -4,19 +4,6 @@ import 'package:flutter/material.dart';
 Color get _accentColor => TColors.accent;
 Color get _lightBlueColor => TColors.accent10;
 
-class _Buttons {
-  _Buttons._();
-  static ButtonStyle largePrimaryButtonStyle(
-    BuildContext context,
-  ) {
-    return _createPrimaryButtonTheme(context,
-        height: ButtonSize.large.height,
-        fontSize: ButtonSize.large.fontSize,
-        textColor: Colors.white,
-        backgroundColor: _accentColor);
-  }
-}
-
 ButtonStyle _createPrimaryButtonTheme(BuildContext context,
     {required double height,
     required double fontSize,

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:isolate';
 import 'package:async/async.dart';
 import '../scheduling/task.dart';
-import '../worker/worker.dart';
+import 'worker.dart';
 
 class WorkerImpl implements Worker {
   late Isolate _isolate;

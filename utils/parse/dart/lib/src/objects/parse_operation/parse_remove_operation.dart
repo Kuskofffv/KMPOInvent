@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_parenthesis
+
 part of '../../../parse_server_sdk.dart';
 
 /// An operation that removes every instance of an element from an array

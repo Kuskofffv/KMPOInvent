@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_types_on_closure_parameters, cascade_invocations, use_setters_to_change_properties
+
 part of '../../parse_server_sdk.dart';
 
 abstract class ParseBase {

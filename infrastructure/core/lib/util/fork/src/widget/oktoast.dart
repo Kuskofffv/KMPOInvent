@@ -2,8 +2,8 @@ part of '../core/toast.dart';
 
 class OKToast extends StatefulWidget {
   const OKToast({
-    super.key,
     required this.child,
+    super.key,
     this.textStyle,
     this.radius = 10.0,
     this.position = ToastPosition.center,
@@ -81,7 +81,7 @@ class _OKToastState extends State<OKToast> {
     final Overlay overlay = Overlay(
       initialEntries: <OverlayEntry>[
         OverlayEntry(
-          builder: (BuildContext ctx) {
+          builder: (ctx) {
             _contextMap[this] = ctx;
             return widget.child;
           },
@@ -97,7 +97,7 @@ class _OKToastState extends State<OKToast> {
     final TextStyle textStyle = widget.textStyle ?? _defaultTextStyle;
     final TextAlign textAlign = widget.textAlign ?? TextAlign.center;
     final EdgeInsets textPadding = widget.textPadding ??
-        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0);
+        const EdgeInsets.symmetric(horizontal: 8, vertical: 4);
 
     final OKToastAnimationBuilder animationBuilder =
         widget.animationBuilder ?? _defaultBuildAnimation;

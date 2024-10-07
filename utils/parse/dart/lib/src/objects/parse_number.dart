@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_returning_this
+
 part of '../../parse_server_sdk.dart';
 
 class _ParseNumber implements _Valuable<num>, _ParseSaveStateAwareChild {

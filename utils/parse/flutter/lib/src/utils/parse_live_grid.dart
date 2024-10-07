@@ -11,8 +11,8 @@ part of 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 /// refreshing the live list of objects.
 class ParseLiveGridWidget<T extends sdk.ParseObject> extends StatefulWidget {
   const ParseLiveGridWidget({
-    super.key,
     required this.query,
+    super.key,
     this.gridLoadingElement,
     this.queryEmptyElement,
     this.duration = const Duration(milliseconds: 300),
@@ -101,7 +101,7 @@ class _ParseLiveGridWidgetState<T extends sdk.ParseObject>
       listeningIncludes: widget.listeningIncludes,
       lazyLoading: widget.lazyLoading,
       preloadedColumns: widget.preloadedColumns,
-    ).then((sdk.ParseLiveList<T> value) {
+    ).then((value) {
       if (value.size > 0) {
         setState(() {
           noData = false;
@@ -113,8 +113,7 @@ class _ParseLiveGridWidgetState<T extends sdk.ParseObject>
       }
       setState(() {
         _liveGrid = value;
-        _liveGrid!.stream
-            .listen((sdk.ParseLiveListEvent<sdk.ParseObject> event) {
+        _liveGrid!.stream.listen((event) {
           if (mounted) {
             setState(() {});
           }
@@ -146,11 +145,11 @@ class _ParseLiveGridWidgetState<T extends sdk.ParseObject>
   Widget buildAnimatedGrid(sdk.ParseLiveList<T> liveGrid) {
     Animation<double> boxAnimation;
     boxAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
+      begin: 0,
+      end: 1,
     ).animate(
       CurvedAnimation(
-        // TODO: AnimationController is always null, so this breaks
+        // AnimationController is always null, so this breaks
         parent: widget.animationController!,
         curve: const Interval(
           0,
@@ -173,8 +172,8 @@ class _ParseLiveGridWidgetState<T extends sdk.ParseObject>
             mainAxisSpacing: widget.mainAxisSpacing,
             childAspectRatio: widget.childAspectRatio),
         itemBuilder: (
-          BuildContext context,
-          int index,
+          context,
+          index,
         ) {
           return ParseLiveListElementWidget<T>(
             key: ValueKey<String>(liveGrid.getIdentifier(index)),

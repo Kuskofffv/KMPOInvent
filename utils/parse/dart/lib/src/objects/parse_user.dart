@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references, cascade_invocations, only_throw_errors, avoid_print
+
 part of '../../parse_server_sdk.dart';
 
 class ParseUser extends ParseObject implements ParseCloneable {
@@ -24,10 +26,18 @@ class ParseUser extends ParseObject implements ParseCloneable {
           autoSendSessionId: true,
           debug: debug,
         ) {
-    if (username != null) this.username = username;
-    if (emailAddress != null) this.emailAddress = emailAddress;
-    if (password != null) this.password = password;
-    if (sessionToken != null) this.sessionToken = sessionToken;
+    if (username != null) {
+      this.username = username;
+    }
+    if (emailAddress != null) {
+      this.emailAddress = emailAddress;
+    }
+    if (password != null) {
+      this.password = password;
+    }
+    if (sessionToken != null) {
+      this.sessionToken = sessionToken;
+    }
   }
 
   ParseUser.forQuery() : super(keyClassUser);
@@ -51,7 +61,9 @@ class ParseUser extends ParseObject implements ParseCloneable {
   set password(String? password) {
     if (_password != password) {
       _password = password;
-      if (password != null) _unsavedChanges[keyVarPassword] = password;
+      if (password != null) {
+        _unsavedChanges[keyVarPassword] = password;
+      }
     }
   }
 
@@ -150,9 +162,9 @@ class ParseUser extends ParseObject implements ParseCloneable {
   /// returned
   static Future<dynamic> currentUser({ParseCloneable? customUserObject}) async {
     if (customUserObject != null) {
-      return await _getUserFromLocalStore(cloneable: customUserObject);
+      return _getUserFromLocalStore(cloneable: customUserObject);
     } else {
-      return await _getUserFromLocalStore();
+      return _getUserFromLocalStore();
     }
   }
 
@@ -319,7 +331,7 @@ class ParseUser extends ParseObject implements ParseCloneable {
     final String? sessionId = ParseCoreData().sessionId;
 
     if (sessionId == null) {
-      return await _handleResponse(
+      return _handleResponse(
           this,
           ParseNetworkResponse(data: "{}", statusCode: 200),
           ParseApiRQ.logout,
@@ -395,7 +407,7 @@ class ParseUser extends ParseObject implements ParseCloneable {
   @override
   Future<ParseResponse> save({dynamic context}) async {
     if (objectId == null) {
-      return await signUp();
+      return signUp();
     } else {
       final ParseResponse response = await super.save();
       if (response.success) {
@@ -408,7 +420,7 @@ class ParseUser extends ParseObject implements ParseCloneable {
   @override
   Future<ParseResponse> update({dynamic context}) async {
     if (objectId == null) {
-      return await signUp();
+      return signUp();
     } else {
       final ParseResponse response = await super.update();
       if (response.success) {

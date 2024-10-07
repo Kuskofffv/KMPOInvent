@@ -140,10 +140,11 @@ ToastFuture showToastWidget(
 
   final GlobalKey<_ToastContainerState> key = GlobalKey();
 
+  // ignore: parameter_assignments
   widget = Align(alignment: position.align, child: widget);
 
   final OverlayEntry entry = OverlayEntry(
-    builder: (BuildContext ctx) {
+    builder: (ctx) {
       return IgnorePointer(
         ignoring: !handleTouch!,
         child: Directionality(
@@ -177,9 +178,7 @@ ToastFuture showToastWidget(
   );
 
   if (duration != Duration.zero) {
-    future.timer = Timer(duration, () {
-      future.dismiss();
-    });
+    future.timer = Timer(duration, future.dismiss);
   }
 
   ToastManager().addFuture(future);

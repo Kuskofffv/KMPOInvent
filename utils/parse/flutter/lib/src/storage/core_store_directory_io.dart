@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_slow_async_io
+
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 /// A storage directories
 class CoreStoreDirectory {
@@ -26,7 +28,7 @@ class CoreStoreDirectory {
   /// library directory to prevent issues with Parse SDK Flutter on iOS.
   /// Migrate SDK internal database file on iOS, see:
   /// https://github.com/parse-community/Parse-SDK-Flutter/issues/791
-  /// TODO: Remove this migration algorithm in the future.
+  /// : Remove this migration algorithm in the future.
   Future<void> _migrateDBFileToLibraryDirectory() async {
     final dbFile = await _getDBFileIfExistsInAppDocDir();
 

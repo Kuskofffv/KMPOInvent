@@ -2,9 +2,8 @@ import 'package:brigantina_invent/widget/page.dart';
 import 'package:core/util/exception/exception_parser.dart';
 import 'package:core/util/globals.dart';
 import 'package:core/util/simple.dart';
+import 'package:core/util/worker_manager/worker_manager.dart';
 import 'package:flutter/material.dart';
-
-import '../utils/worker_manager/worker_manager.dart';
 
 class Snapshot<T> {
   final T data;

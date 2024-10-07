@@ -1,7 +1,7 @@
 import 'dart:async';
 import '../scheduling/runnable.dart';
 import '../scheduling/task.dart';
-import '../worker/worker.dart';
+import 'worker.dart';
 
 class WorkerImpl implements Worker {
   int? _runnableNumber;

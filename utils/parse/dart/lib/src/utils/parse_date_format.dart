@@ -1,3 +1,5 @@
+// ignore_for_file: parameter_assignments
+
 part of '../../parse_server_sdk.dart';
 
 final _ParseDateFormat _parseDateFormat = _ParseDateFormat._internal();

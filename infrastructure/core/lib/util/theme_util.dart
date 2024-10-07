@@ -33,30 +33,30 @@ class ThemeUtil {
     return ElevatedButtonThemeData(
         style: ButtonStyle(
       // Sets the background color of the button.
-      backgroundColor: MaterialStateProperty.all(colorLocal),
+      backgroundColor: WidgetStateProperty.all(colorLocal),
       // Sets the foreground color of the button.
-      foregroundColor: MaterialStateProperty.all(
+      foregroundColor: WidgetStateProperty.all(
           foregroundColor ?? (isDarkColorLocal ? Colors.white : Colors.black)),
       // Sets the padding of the button.
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
           EdgeInsets.fromLTRB(paddingSide ?? 16, 0, paddingSide ?? 16, 0)),
       // Sets the text style of the button.
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
           TextStyle(fontSize: textSize ?? 18, fontWeight: fontWeight)),
       // Sets the shape of the button.
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(round ?? 12.0),
       )),
       // Sets the overlay color of the button.
-      overlayColor: MaterialStateProperty.all(
+      overlayColor: WidgetStateProperty.all(
           isDarkColorLocal ? Colors.white24 : Colors.black12),
       // Sets the minimum size of the button.
-      minimumSize: MaterialStateProperty.all(Size(0, height ?? 56)),
+      minimumSize: WidgetStateProperty.all(Size(0, height ?? 56)),
       // Sets the tap target size of the button.
       tapTargetSize: tapTargetSize,
       // Sets the elevation of the button.
-      elevation: MaterialStateProperty.all(elevation),
+      elevation: WidgetStateProperty.all(elevation),
     ));
   }
 
@@ -86,25 +86,25 @@ class ThemeUtil {
     return OutlinedButtonThemeData(
         style: ButtonStyle(
       // Sets the foreground color of the button.
-      foregroundColor: MaterialStateProperty.all(foregroundColorLocal),
+      foregroundColor: WidgetStateProperty.all(foregroundColorLocal),
       // Sets the padding of the button.
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
           EdgeInsets.fromLTRB(paddingSide ?? 16, 0, paddingSide ?? 16, 0)),
       // Sets the text style of the button.
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
           TextStyle(fontSize: textSize ?? 18, fontWeight: fontWeight)),
       // Sets the shape of the button.
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(round ?? 12.0),
       )),
       // Sets the border side of the button.
-      side: MaterialStateProperty.all(BorderSide(
+      side: WidgetStateProperty.all(BorderSide(
           color: colorLocal, width: borderWidth, style: BorderStyle.solid)),
       // Sets the overlay color of the button.
-      overlayColor: MaterialStateProperty.all(Colors.black12),
+      overlayColor: WidgetStateProperty.all(Colors.black12),
       // Sets the minimum size of the button.
-      minimumSize: MaterialStateProperty.all(Size(0, height ?? 56)),
+      minimumSize: WidgetStateProperty.all(Size(0, height ?? 56)),
       // Sets the tap target size of the button.
       tapTargetSize: tapTargetSize,
     ));

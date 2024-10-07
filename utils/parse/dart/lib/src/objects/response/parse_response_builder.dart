@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 part of '../../../parse_server_sdk.dart';
 
 /// Handles all the ParseObject responses
@@ -68,8 +70,9 @@ class _ParseResponseBuilder {
       final List<dynamic>? list = result;
 
       if (object is List && object.length == list!.length) {
-        response.count = object.length;
-        response.results = <dynamic>[];
+        response
+          ..count = object.length
+          ..results = <dynamic>[];
 
         for (int i = 0; i < object.length; i++) {
           final Map<String, dynamic> objectResult = list[i];
@@ -100,24 +103,28 @@ class _ParseResponseBuilder {
         final List<dynamic> results = map['results'];
         if (results[0] is String) {
           response.results = results;
-          response.result = results;
-          response.count = results.length;
+          response
+            ..result = results
+            ..count = results.length;
         } else {
           final List<T> items = _handleMultipleResults<T>(object, results);
-          response.results = items;
-          response.result = items;
-          response.count = items.length;
+          response
+            ..results = items
+            ..result = items
+            ..count = items.length;
         }
       } else if (map.length == 2 && map.containsKey('count')) {
         final List<int> results = <int>[map['count']];
-        response.results = results;
-        response.result = results;
-        response.count = map['count'];
+        response
+          ..results = results
+          ..result = results
+          ..count = map['count'];
       } else {
         final T? item = _handleSingleResult<T>(object, map, false);
-        response.count = 1;
-        response.result = item;
-        response.results = <T?>[item];
+        response
+          ..count = 1
+          ..result = item
+          ..results = <T?>[item];
       }
     }
 
@@ -127,7 +134,7 @@ class _ParseResponseBuilder {
   /// Handles a response with a multiple result object
   List<T> _handleMultipleResults<T>(T object, List<dynamic> data) {
     final List<T> resultsList = <T>[];
-    for (dynamic value in data) {
+    for (final dynamic value in data) {
       resultsList.add(_handleSingleResult<T>(object, value, true) as T);
     }
     return resultsList;
@@ -142,7 +149,7 @@ class _ParseResponseBuilder {
       // Merge unsaved changes and response.
       final Map<String, dynamic> unsaved = <String, dynamic>{};
       unsaved.addAll(object._unsavedChanges);
-      unsaved.forEach((String k, dynamic v) {
+      unsaved.forEach((k, dynamic v) {
         if (map[k] != null && map[k] != v) {
           // Changes after save & before response. Keep it.
           map.remove(k);

@@ -10,7 +10,7 @@ class ToastManager {
   final Set<ToastFuture> toastSet = <ToastFuture>{};
 
   void dismissAll({bool showAnim = false}) {
-    toastSet.toList().forEach((ToastFuture v) {
+    toastSet.toList().forEach((v) {
       v.dismiss(showAnim: showAnim);
     });
   }

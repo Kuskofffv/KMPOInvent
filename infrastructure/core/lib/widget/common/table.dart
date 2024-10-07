@@ -6,12 +6,11 @@ import 'package:core/util/globals.dart';
 import 'package:core/util/simple.dart';
 import 'package:core/util/theme/colors.dart';
 import 'package:core/util/widget/adaptation.dart';
+import 'package:core/util/worker_manager/worker_manager.dart';
 import 'package:core/widget/common/button.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import 'package:worker_manager/worker_manager.dart';
 
-import '../../core_dependencies.dart';
 import 'overlay.dart';
 import 'page.dart';
 

@@ -3,9 +3,9 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:brigantina_invent/utils/worker_manager/worker_manager.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';
+import 'package:core/util/worker_manager/worker_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';

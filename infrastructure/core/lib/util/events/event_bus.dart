@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 /// Events are normal Dart objects. By specifying a class, listeners can
 /// filter events.
 ///
-var eventBus = EventBus();
+final eventBus = EventBus();
 
 void sendEvent<T>(T event) {
   if (kDebugMode) {
@@ -22,7 +22,7 @@ void sendEvent<T>(T event) {
 }
 
 class EventBus {
-  StreamController _streamController;
+  final StreamController _streamController;
 
   /// Controller for the event bus stream.
   StreamController get streamController => _streamController;
@@ -68,7 +68,7 @@ class EventBus {
 
   /// Fires a new event on the event bus with the specified [event].
   ///
-  void fire(event) {
+  void fire(Object? event) {
     streamController.add(event);
   }
 

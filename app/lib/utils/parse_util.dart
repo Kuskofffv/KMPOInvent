@@ -47,6 +47,7 @@ class ParseDateFormat {
   /// Serialize [DateTime] into an ISO-8601 full-precision extended format representation.
   String format(DateTime datetime) {
     if (!datetime.isUtc) {
+      // ignore: parameter_assignments
       datetime = datetime.toUtc();
     }
 

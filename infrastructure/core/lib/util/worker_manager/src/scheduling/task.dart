@@ -1,5 +1,5 @@
 import 'dart:async';
-import '../scheduling/runnable.dart';
+import 'runnable.dart';
 
 enum WorkPriority {
   immediately,

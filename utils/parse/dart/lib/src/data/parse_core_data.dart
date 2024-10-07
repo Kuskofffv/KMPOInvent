@@ -18,6 +18,7 @@ class ParseCoreData {
     String appId,
     String serverUrl, {
     required bool debug,
+    required bool autoSendSessionId,
     String? appName,
     String? appVersion,
     String? appPackageName,
@@ -26,7 +27,6 @@ class ParseCoreData {
     String? masterKey,
     String? clientKey,
     String? sessionId,
-    required bool autoSendSessionId,
     SecurityContext? securityContext,
     CoreStore? store,
     Map<String, ParseObjectConstructor>? registeredSubClassMap,
@@ -123,6 +123,7 @@ class ParseCoreData {
   ///
   /// This is generated when a users logs in, or calls currentUser to update
   /// their keys
+  // ignore: use_setters_to_change_properties
   void setSessionId(String sessionId) {
     this.sessionId = sessionId;
   }

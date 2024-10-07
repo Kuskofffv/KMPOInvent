@@ -7,6 +7,7 @@ class ParseNotification {
   final void Function(String value) onShowNotification;
 
   /// Show notification
+  // ignore: type_annotate_public_apis
   void showNotification(title) {
     onShowNotification.call(title);
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 part of '../../parse_server_sdk.dart';
 
 // ignore_for_file: deprecated_member_use

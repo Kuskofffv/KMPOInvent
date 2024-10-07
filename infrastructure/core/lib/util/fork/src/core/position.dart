@@ -9,10 +9,10 @@ class ToastPosition {
   static const ToastPosition center = ToastPosition();
 
   static const ToastPosition bottom =
-      ToastPosition(align: Alignment.bottomCenter, offset: -30.0);
+      ToastPosition(align: Alignment.bottomCenter, offset: -30);
 
   static const ToastPosition top =
-      ToastPosition(align: Alignment.topCenter, offset: 75.0);
+      ToastPosition(align: Alignment.topCenter, offset: 75);
 
   ToastPosition copyWith({AlignmentGeometry? align, double? offset}) {
     return ToastPosition(

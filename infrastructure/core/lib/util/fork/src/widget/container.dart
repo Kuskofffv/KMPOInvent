@@ -2,13 +2,13 @@ part of '../core/toast.dart';
 
 class ToastContainer extends StatefulWidget {
   const ToastContainer({
-    super.key,
     required this.duration,
     required this.child,
     required this.position,
     required this.animationBuilder,
     required this.animationDuration,
     required this.animationCurve,
+    super.key,
     this.movingOnWindowChange = false,
   });
 
@@ -45,11 +45,11 @@ class _ToastContainerState extends State<ToastContainer>
     WidgetsBinding.instance.addObserver(this);
 
     Future<void>.delayed(const Duration(milliseconds: 30), () {
-      _animateTo(1.0);
+      _animateTo(1);
     });
     if (widget.duration != Duration.zero) {
       Future<void>.delayed(widget.duration - animationDuration, () {
-        _animateTo(0.0);
+        _animateTo(0);
       });
     }
   }
@@ -73,7 +73,7 @@ class _ToastContainerState extends State<ToastContainer>
   Widget build(BuildContext context) {
     final Widget w = AnimatedBuilder(
       animation: _animationController,
-      builder: (_, Widget? child) => widget.animationBuilder(
+      builder: (_, child) => widget.animationBuilder(
         context,
         child!,
         _animationController,

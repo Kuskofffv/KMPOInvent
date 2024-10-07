@@ -17,7 +17,8 @@ class CoreStoreSembast implements sdk.CoreStoreSembastImp {
 
   /// Returns the database directory.
   static Future<String> _dbDirectory() async {
-    String dbDirectory = await CoreStoreDirectory().getDatabaseDirectory();
+    final String dbDirectory =
+        await CoreStoreDirectory().getDatabaseDirectory();
     return path.join('$dbDirectory/parse', 'parse.db');
   }
 

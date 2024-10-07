@@ -9,7 +9,9 @@ class ParseRelationException implements ParseException {
 
   @override
   String toString() {
-    if (message == null) return "ParseRelationException";
+    if (message == null) {
+      return "ParseRelationException";
+    }
     return "ParseRelationException: $message";
   }
 }
@@ -21,7 +23,9 @@ class ParseOperationException implements ParseException {
 
   @override
   String toString() {
-    if (message == null) return "ParseOperationException";
+    if (message == null) {
+      return "ParseOperationException";
+    }
     return "ParseOperationException: $message";
   }
 }

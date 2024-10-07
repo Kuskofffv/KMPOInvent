@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_mixin, avoid_print
+
 import 'package:dio/dio.dart' as dio;
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -146,9 +148,10 @@ class ParseDioClient extends ParseClient {
     }
   }
 
+  // ignore: always_declare_return_types
   _getOtherCaseErrorForParseNetworkResponse(String error) {
     return ParseNetworkResponse(
-        data: "{\"code\":${ParseError.otherCause},\"error\":\"$error\"}",
+        data: '{"code":${ParseError.otherCause},"error":"$error"}',
         statusCode: ParseError.otherCause);
   }
 
@@ -221,8 +224,8 @@ class _ParseDioClient with dio.DioMixin implements dio.Dio {
 
     /// If developer wants to add custom headers, extend this class and add headers needed.
     if (additionalHeaders != null && additionalHeaders!.isNotEmpty) {
-      additionalHeaders!.forEach(
-          (String key, String value) => options!.headers![key] = value);
+      additionalHeaders!
+          .forEach((key, value) => options!.headers![key] = value);
     }
 
     if (parseCoreData.debug) {
@@ -246,15 +249,15 @@ class _ParseDioClient with dio.DioMixin implements dio.Dio {
     String curlCmd = 'curl';
     curlCmd += ' -X ${options.method!}';
     bool compressed = false;
-    options.headers!.forEach((String name, dynamic value) {
+    options.headers!.forEach((name, dynamic value) {
       if (name.toLowerCase() == 'accept-encoding' &&
           value?.toString().toLowerCase() == 'gzip') {
         compressed = true;
       }
-      curlCmd += ' -H \'$name: $value\'';
+      curlCmd += " -H '$name: $value'";
     });
 
-    //TODO: log request
+    //log request
     // if (options.method == 'POST' || options.method == 'PUT') {
     //   if (request is Request) {
     //     final String body = latin1.decode(request.bodyBytes);

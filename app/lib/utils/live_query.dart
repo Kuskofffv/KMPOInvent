@@ -1,5 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 
+// ignore: implementation_imports
+import 'package:flutter/foundation.dart';
 // ignore: implementation_imports
 import 'package:parse_server_sdk/src/network/parse_websocket.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
@@ -77,11 +81,15 @@ class RusSemLiveQuery {
 
       if (_webSocket != null && _webSocket!.readyState == WebSocket.open) {
         if (_debug) {
-          print('$_printConstLiveQuery: Socket opened');
+          if (kDebugMode) {
+            print('$_printConstLiveQuery: Socket opened');
+          }
         }
       } else {
         if (_debug) {
-          print('$_printConstLiveQuery: Error when connection client');
+          if (kDebugMode) {
+            print('$_printConstLiveQuery: Error when connection client');
+          }
           return Future<void>.value(null);
         }
       }
@@ -90,7 +98,9 @@ class RusSemLiveQuery {
       // WebSocketChannel(_webSocket!);
       _channel!.stream.listen((dynamic message) {
         if (_debug) {
-          print('$_printConstLiveQuery: Listen: $message');
+          if (kDebugMode) {
+            print('$_printConstLiveQuery: Listen: $message');
+          }
         }
 
         final Map<String, dynamic> actionData = jsonDecode(message);
@@ -112,13 +122,17 @@ class RusSemLiveQuery {
         }
       }, onDone: () {
         if (_debug) {
-          print('$_printConstLiveQuery: Done');
+          if (kDebugMode) {
+            print('$_printConstLiveQuery: Done');
+          }
         }
         _state = RusSemLiveQueryState.Idle;
       }, onError: (error) {
         if (_debug) {
-          print(
-              '$_printConstLiveQuery: Error: ${error.runtimeType.toString()}');
+          if (kDebugMode) {
+            print(
+                '$_printConstLiveQuery: Error: ${error.runtimeType.toString()}');
+          }
         }
         return Future<ParseResponse>.value(handleException(
             Exception(error), ParseApiRQ.liveQuery, _debug, _className));
@@ -142,7 +156,9 @@ class RusSemLiveQuery {
       }
 
       if (_debug) {
-        print('$_printConstLiveQuery: ConnectMessage: $_connectMessage');
+        if (kDebugMode) {
+          print('$_printConstLiveQuery: ConnectMessage: $_connectMessage');
+        }
       }
       _channel!.sink.add(jsonEncode(_connectMessage));
 
@@ -163,7 +179,9 @@ class RusSemLiveQuery {
       }
 
       if (_debug) {
-        print('$_printConstLiveQuery: SubscribeMessage: $_subscribeMessage');
+        if (kDebugMode) {
+          print('$_printConstLiveQuery: SubscribeMessage: $_subscribeMessage');
+        }
       }
 
       _channel!.sink.add(jsonEncode(_subscribeMessage));
@@ -176,7 +194,9 @@ class RusSemLiveQuery {
       _state = RusSemLiveQueryState.Connected;
     } on Exception catch (e) {
       if (_debug) {
-        print('$_printConstLiveQuery: Error: ${e.toString()}');
+        if (kDebugMode) {
+          print('$_printConstLiveQuery: Error: ${e.toString()}');
+        }
       }
       _state = RusSemLiveQueryState.Idle;
       return handleException(e, ParseApiRQ.liveQuery, _debug, _className);
@@ -190,15 +210,19 @@ class RusSemLiveQuery {
   Future<void> unSubscribe() async {
     if (_channel != null) {
       if (_debug) {
-        print(
-            '$_printConstLiveQuery: UnsubscribeMessage: $_unsubscribeMessage');
+        if (kDebugMode) {
+          print(
+              '$_printConstLiveQuery: UnsubscribeMessage: $_unsubscribeMessage');
+        }
       }
       _channel!.sink.add(jsonEncode(_unsubscribeMessage));
       await _channel!.sink.close();
     }
     if (_webSocket != null && _webSocket!.readyState == WebSocket.open) {
       if (_debug) {
-        print('$_printConstLiveQuery: Socket closed');
+        if (kDebugMode) {
+          print('$_printConstLiveQuery: Socket closed');
+        }
       }
       await _webSocket!.close();
     }

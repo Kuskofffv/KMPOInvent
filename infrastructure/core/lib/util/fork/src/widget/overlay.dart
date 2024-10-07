@@ -6,9 +6,9 @@ import 'dart:collection';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 
 /// A place in an [Overlay] that can contain a widget.
 ///
@@ -150,7 +150,7 @@ class OverlayEntry extends ChangeNotifier {
     overlay._entries.remove(this);
     if (SchedulerBinding.instance.schedulerPhase ==
         SchedulerPhase.persistentCallbacks) {
-      SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
+      SchedulerBinding.instance.addPostFrameCallback((duration) {
         overlay._markDirty();
       });
     } else {
@@ -381,11 +381,11 @@ class OverlayState extends State<Overlay> with TickerProviderStateMixin {
   }) {
     assert(_debugVerifyInsertPosition(above, below));
     assert(
-      entries.every((OverlayEntry entry) => !_entries.contains(entry)),
+      entries.every((entry) => !_entries.contains(entry)),
       'One or more of the specified entries are already present in the Overlay.',
     );
     assert(
-      entries.every((OverlayEntry entry) => entry._overlay == null),
+      entries.every((entry) => entry._overlay == null),
       'One or more of the specified entries are already present in another Overlay.',
     );
     if (entries.isEmpty) {
@@ -456,15 +456,13 @@ class OverlayState extends State<Overlay> with TickerProviderStateMixin {
     );
     assert(
       newEntriesList.every(
-        (OverlayEntry entry) =>
-            entry._overlay == null || entry._overlay == this,
+        (entry) => entry._overlay == null || entry._overlay == this,
       ),
       'One or more of the specified entries are already present in another Overlay.',
     );
     assert(
       newEntriesList.every(
-        (OverlayEntry entry) =>
-            _entries.indexOf(entry) == _entries.lastIndexOf(entry),
+        (entry) => _entries.indexOf(entry) == _entries.lastIndexOf(entry),
       ),
       'One or more of the specified entries are specified multiple times.',
     );
@@ -480,8 +478,9 @@ class OverlayState extends State<Overlay> with TickerProviderStateMixin {
       entry._overlay ??= this;
     }
     setState(() {
-      _entries.clear();
-      _entries.addAll(newEntriesList);
+      _entries
+        ..clear()
+        ..addAll(newEntriesList);
       old.removeAll(newEntriesList);
       _entries.insertAll(_insertionIndex(below, above), old);
     });
@@ -638,8 +637,8 @@ class TheatreElement extends MultiChildRenderObjectElement {
 class RenderTheatre extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, StackParentData> {
   RenderTheatre({
-    List<RenderBox>? children,
     required TextDirection textDirection,
+    List<RenderBox>? children,
     int skipCount = 0,
     Clip clipBehavior = Clip.hardEdge,
   })  : assert(skipCount >= 0),
@@ -727,7 +726,7 @@ class RenderTheatre extends RenderBox
   double computeMinIntrinsicWidth(double height) {
     return RenderStack.getIntrinsicDimension(
       _firstOnstageChild,
-      (RenderBox child) => child.getMinIntrinsicWidth(height),
+      (child) => child.getMinIntrinsicWidth(height),
     );
   }
 
@@ -735,7 +734,7 @@ class RenderTheatre extends RenderBox
   double computeMaxIntrinsicWidth(double height) {
     return RenderStack.getIntrinsicDimension(
       _firstOnstageChild,
-      (RenderBox child) => child.getMaxIntrinsicWidth(height),
+      (child) => child.getMaxIntrinsicWidth(height),
     );
   }
 
@@ -743,7 +742,7 @@ class RenderTheatre extends RenderBox
   double computeMinIntrinsicHeight(double width) {
     return RenderStack.getIntrinsicDimension(
       _firstOnstageChild,
-      (RenderBox child) => child.getMinIntrinsicHeight(width),
+      (child) => child.getMinIntrinsicHeight(width),
     );
   }
 
@@ -751,7 +750,7 @@ class RenderTheatre extends RenderBox
   double computeMaxIntrinsicHeight(double width) {
     return RenderStack.getIntrinsicDimension(
       _firstOnstageChild,
-      (RenderBox child) => child.getMaxIntrinsicHeight(width),
+      (child) => child.getMaxIntrinsicHeight(width),
     );
   }
 
@@ -836,9 +835,9 @@ class RenderTheatre extends RenderBox
       final bool isHit = result.addWithPaintOffset(
         offset: childParentData.offset,
         position: position,
-        hitTest: (BoxHitTestResult result, Offset? transformed) {
+        hitTest: (result, transformed) {
           assert(transformed == position - childParentData.offset);
-          return child!.hitTest(result, position: transformed!);
+          return child!.hitTest(result, position: transformed);
         },
       );
       if (isHit) {
@@ -897,8 +896,9 @@ class RenderTheatre extends RenderBox
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IntProperty('skipCount', skipCount));
-    properties.add(EnumProperty<TextDirection>('textDirection', textDirection));
+    properties
+      ..add(IntProperty('skipCount', skipCount))
+      ..add(EnumProperty<TextDirection>('textDirection', textDirection));
   }
 
   @override

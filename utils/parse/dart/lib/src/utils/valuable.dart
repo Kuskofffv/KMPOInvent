@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references
+
 part of '../../parse_server_sdk.dart';
 
 /// A unified interface used to expose the internal state of a private class.

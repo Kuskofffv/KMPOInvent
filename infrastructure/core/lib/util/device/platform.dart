@@ -76,8 +76,10 @@ class TPlatform {
   static double get screenHeight =>
       mediaQueryData.size.height * kUserScreenWidthDP;
 
+  // ignore: deprecated_member_use
   static double get screenPixelWidth => window.physicalSize.width;
 
+  // ignore: deprecated_member_use
   static double get screenPixelHeight => window.physicalSize.height;
 
   static void preloadMediaQuery(BuildContext context) {

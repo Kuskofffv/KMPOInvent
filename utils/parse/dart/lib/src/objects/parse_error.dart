@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references, avoid_print
+
 part of '../../parse_server_sdk.dart';
 
 /// ParseException is used in [ParseResult] to inform the user of the exception

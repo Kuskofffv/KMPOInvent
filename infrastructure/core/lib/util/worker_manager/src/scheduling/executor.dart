@@ -5,9 +5,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../cancelable/cancelable.dart';
-import '../scheduling/runnable.dart';
-import '../scheduling/task.dart';
 import '../worker/worker.dart';
+import 'runnable.dart';
+import 'task.dart';
 
 abstract class Executor {
   factory Executor() => _Executor();

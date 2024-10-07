@@ -28,6 +28,7 @@ void logAPIResponse(
 
   responseString += '\n╰-- \n';
   responseString += spacer;
+  // ignore: avoid_print
   print(responseString);
 }
 
@@ -40,5 +41,6 @@ void logRequest(
   requestString += '\nBody: $body';
 
   requestString += '\n----\n';
+  // ignore: avoid_print
   print(requestString);
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_setters_without_getters, cascade_invocations, avoid_print
+
 part of '../../parse_server_sdk.dart';
 
 class ParseInstallation extends ParseObject {
@@ -96,13 +98,13 @@ class ParseInstallation extends ParseObject {
 
   String _getNameLocalTimeZone() {
     tz.initializeTimeZones();
-    var locations = tz.timeZoneDatabase.locations;
+    final locations = tz.timeZoneDatabase.locations;
 
-    int milliseconds = DateTime.now().timeZoneOffset.inMilliseconds;
+    final int milliseconds = DateTime.now().timeZoneOffset.inMilliseconds;
     String name = "";
 
     locations.forEach((key, value) {
-      for (var element in value.zones) {
+      for (final element in value.zones) {
         if (element.offset == milliseconds) {
           name = value.name;
           break;

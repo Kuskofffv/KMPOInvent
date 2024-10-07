@@ -20,8 +20,8 @@ typedef DataGetter<T extends sdk.ParseObject> = T? Function();
 /// lazy loading of objects in the list.
 class ParseLiveListWidget<T extends sdk.ParseObject> extends StatefulWidget {
   const ParseLiveListWidget({
-    super.key,
     required this.query,
+    super.key,
     this.listLoadingElement,
     this.queryEmptyElement,
     this.duration = const Duration(milliseconds: 300),
@@ -97,11 +97,11 @@ class _ParseLiveListWidgetState<T extends sdk.ParseObject>
       listeningIncludes: widget.listeningIncludes,
       lazyLoading: widget.lazyLoading,
       preloadedColumns: widget.preloadedColumns,
-    ).then((sdk.ParseLiveList<T> liveList) {
+    ).then((liveList) {
       setState(() {
         _noData = liveList.size == 0;
         _liveList = liveList;
-        liveList.stream.listen((sdk.ParseLiveListEvent<sdk.ParseObject> event) {
+        liveList.stream.listen((event) {
           final AnimatedListState? animatedListState =
               _animatedListKey.currentState;
           if (animatedListState != null) {
@@ -115,8 +115,7 @@ class _ParseLiveListWidgetState<T extends sdk.ParseObject>
             } else if (event is sdk.ParseLiveListDeleteEvent) {
               animatedListState.removeItem(
                   event.index,
-                  (BuildContext context, Animation<double> animation) =>
-                      ParseLiveListElementWidget<T>(
+                  (context, animation) => ParseLiveListElementWidget<T>(
                         key: ValueKey<String>(
                             event.object.get<String>(sdk.keyVarObjectId) ??
                                 'removingItem'),
@@ -124,8 +123,8 @@ class _ParseLiveListWidgetState<T extends sdk.ParseObject>
                             ParseLiveListWidget.defaultChildBuilder,
                         sizeFactor: animation,
                         duration: widget.duration,
-                        loadedData: () => event.object as T,
-                        preLoadedData: () => event.object as T,
+                        loadedData: () => event.object,
+                        preLoadedData: () => event.object,
                       ),
                   duration: widget.duration);
               setState(() {
@@ -183,8 +182,7 @@ class _ParseLiveListWidgetState<T extends sdk.ParseObject>
         reverse: widget.reverse,
         shrinkWrap: widget.shrinkWrap,
         initialItemCount: liveList.size,
-        itemBuilder:
-            (BuildContext context, int index, Animation<double> animation) {
+        itemBuilder: (context, index, animation) {
           return ParseLiveListElementWidget<T>(
             key: ValueKey<String>(liveList.getIdentifier(index)),
             stream: () => liveList.getAt(index),
@@ -209,13 +207,13 @@ class _ParseLiveListWidgetState<T extends sdk.ParseObject>
 class ParseLiveListElementWidget<T extends sdk.ParseObject>
     extends StatefulWidget {
   const ParseLiveListElementWidget(
-      {super.key,
+      {required this.sizeFactor,
+      required this.duration,
+      required this.childBuilder,
+      super.key,
       this.stream,
       this.loadedData,
-      this.preLoadedData,
-      required this.sizeFactor,
-      required this.duration,
-      required this.childBuilder});
+      this.preLoadedData});
 
   final StreamGetter<T>? stream;
   final DataGetter<T>? loadedData;
@@ -243,7 +241,7 @@ class _ParseLiveListElementWidgetState<T extends sdk.ParseObject>
             widget.preLoadedData != null ? widget.preLoadedData!() : null);
     if (widget.stream != null) {
       _streamSubscription = widget.stream!().listen(
-        (T data) {
+        (data) {
           setState(() {
             _snapshot = sdk.ParseLiveListElementSnapshot<T>(
                 loadedData: data, preLoadedData: data);

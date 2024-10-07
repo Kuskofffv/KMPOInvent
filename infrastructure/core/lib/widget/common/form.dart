@@ -1,8 +1,10 @@
-import 'package:core/core_dependencies.dart';
+import 'dart:async';
+
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/globals.dart';
 import 'package:core/util/theme/colors.dart';
 import 'package:core/util/widget/adaptation.dart';
+import 'package:core/util/worker_manager/worker_manager.dart';
 import 'package:core/widget/common/clear_text_suffix_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -910,6 +912,7 @@ Widget _buildRow(
 class TForm extends StatefulWidget {
   final GlobalKey<TFormState> formKey;
   final Widget child;
+  // ignore: deprecated_member_use
   final PopInvokedCallback? onPopInvoked;
   final bool? canPop;
   final AutovalidateMode? autovalidateMode;
@@ -974,6 +977,7 @@ class TFormState extends State<TForm> {
           autovalidateMode:
               widget.autovalidateMode ?? AutovalidateMode.disabled,
           canPop: widget.canPop,
+          // ignore: deprecated_member_use
           onPopInvoked: widget.onPopInvoked,
           onChanged: () {
             if (_errorText != null) {
@@ -1083,9 +1087,9 @@ class _TFormButtonState<T extends Object> extends State<TFormButton<T>> {
 
   Future submitForm() async {
     if (widget.formKey.currentState == null) {
-      SRRouter.showMessagePopup(context,
+      unawaited(SRRouter.showMessagePopup(context,
           title: "Произошла ошибка",
-          message: "Нужно добавить TForm в дерево виджетов");
+          message: "Нужно добавить TForm в дерево виджетов"));
       return;
     }
 

@@ -30,7 +30,7 @@ class TMessagePageWidget extends StatelessWidget {
     const space = SizedBox(height: 30);
     final adaptation = TAdaptation.of(context);
 
-    // TODOdefault image
+    // default image
     final String? imageLocal =
         image; //?? di<ICoreModule>().defaults?.emptyImage;
     var imageSizeLocal = imageSize ?? 340;

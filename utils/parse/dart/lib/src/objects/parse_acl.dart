@@ -1,3 +1,5 @@
+// ignore_for_file: comment_references, avoid_types_on_closure_parameters, avoid_positional_boolean_parameters
+
 part of '../../parse_server_sdk.dart';
 
 /// [ParseACL] is used to control which users can access or modify a particular object

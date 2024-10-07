@@ -1,6 +1,7 @@
+// ignore_for_file: cast_nullable_to_non_nullable, avoid_print
+
 import 'dart:async';
 import 'dart:io' show Directory, File;
-
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 import 'package:yaml_edit/yaml_edit.dart';

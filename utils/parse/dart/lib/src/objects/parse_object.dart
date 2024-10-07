@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations, parameter_assignments, only_throw_errors, unawaited_futures
+
 part of '../../parse_server_sdk.dart';
 
 /// [ParseObject] is a local representation of data that can be saved and
@@ -254,7 +256,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
       uniqueObjects.remove(object);
     }
 
-    for (ParseFileBase file in uniqueFiles) {
+    for (final ParseFileBase file in uniqueFiles) {
       final ParseResponse response = await file.save();
       if (!response.success) {
         return response;
@@ -275,7 +277,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
       final List<ParseObject> current = <ParseObject>[];
       final List<ParseObject> nextBatch = <ParseObject>[];
 
-      for (ParseObject object in remaining) {
+      for (final ParseObject object in remaining) {
         if (object._canbeSerialized(finished)) {
           current.add(object);
         } else {
@@ -285,7 +287,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
 
       remaining = nextBatch;
 
-      // TODO(yulingtianxia): lazy User
+      // (yulingtianxia): lazy User
       /* Batch requests have currently a limit of 50 packaged requests per single request
       This splitting will split the overall array into segments of up to 50 requests
       and execute them concurrently with a wrapper task for all of them. */
@@ -294,12 +296,12 @@ class ParseObject extends ParseBase implements ParseCloneable {
         chunks.add(current.sublist(i, min(current.length, i + 50)));
       }
 
-      for (List<ParseObject> chunk in chunks) {
-        final List<dynamic> requests = chunk.map<dynamic>((ParseObject obj) {
+      for (final List<ParseObject> chunk in chunks) {
+        final List<dynamic> requests = chunk.map<dynamic>((obj) {
           return obj._getRequestJson(obj.objectId == null ? 'POST' : 'PUT');
         }).toList();
 
-        for (ParseObject obj in chunk) {
+        for (final ParseObject obj in chunk) {
           obj._saveChanges();
         }
         final ParseResponse response = await batchRequest(
@@ -327,7 +329,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
           }
         } else {
           // If there was an error, we want to roll forward the save changes before rethrowing.
-          for (ParseObject obj in chunk) {
+          for (final ParseObject obj in chunk) {
             obj._revertSavingChanges();
           }
 
@@ -378,7 +380,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
           return false;
         }
       } else if (value is Map) {
-        for (dynamic child in value.values) {
+        for (final dynamic child in value.values) {
           if (!_canbeSerialized(aftersaving, value: child)) {
             return false;
           }
@@ -392,7 +394,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
           return false;
         }
       } else if (value is Iterable) {
-        for (dynamic child in value) {
+        for (final dynamic child in value) {
           if (!_canbeSerialized(aftersaving, value: child)) {
             return false;
           }
@@ -401,7 +403,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
     } else if (!_canbeSerialized(aftersaving, value: _getObjectData())) {
       return false;
     }
-    // TODO(yulingtianxia): handle ACL
+    // (yulingtianxia): handle ACL
     return true;
   }
 
@@ -412,14 +414,14 @@ class ParseObject extends ParseBase implements ParseCloneable {
       Set<ParseObject> seen,
       Set<ParseObject> seenNew) {
     if (object is Iterable) {
-      for (dynamic child in object) {
+      for (final dynamic child in object) {
         if (!_collectionDirtyChildren(
             child, uniqueObjects, uniqueFiles, seen, seenNew)) {
           return false;
         }
       }
     } else if (object is Map) {
-      for (dynamic child in object.values) {
+      for (final dynamic child in object.values) {
         if (!_collectionDirtyChildren(
             child, uniqueObjects, uniqueFiles, seen, seenNew)) {
           return false;
@@ -436,7 +438,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
         return false;
       }
     } else if (object is ParseACL) {
-      // TODO(yulingtianxia): handle ACL
+      // (yulingtianxia): handle ACL
     } else if (object is ParseFileBase) {
       if (!object.saved) {
         uniqueFiles.add(object);
@@ -448,7 +450,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
         seenNew = <ParseObject>{};
       } else {
         if (seenNew.contains(object)) {
-          // TODO(yulingtianxia): throw an error?
+          // (yulingtianxia): throw an error?
           return false;
         }
         seenNew.add(object);
@@ -680,7 +682,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
 
   Future<void> _addThisObjectToParseCoreDataList(String key) async {
     final CoreStore coreStore = ParseCoreData().getStore();
-    List<String> list = await coreStore.getStringList(key) ?? [];
+    final List<String> list = await coreStore.getStringList(key) ?? [];
     list.add(json.encode(toJson(full: true)));
     await coreStore.setStringList(key, list);
   }
@@ -751,7 +753,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
   static Future<ParseResponse?> submitSaveEventually(
       {ParseClient? client, bool? autoSendSessionId}) async {
     // get client
-    ParseClient localClient = client ??
+    final ParseClient localClient = client ??
         ParseCoreData().clientCreator(
             sendSessionId:
                 autoSendSessionId ?? ParseCoreData().autoSendSessionId,
@@ -762,20 +764,20 @@ class ParseObject extends ParseBase implements ParseCloneable {
 
     // save
     // get json parse saved objects
-    List<String>? listSaves =
+    final List<String>? listSaves =
         await coreStore.getStringList(keyParseStoreObjects);
 
     if (listSaves != null) {
-      List<ParseObject> parseObjectList = [];
-      for (var element in listSaves) {
+      final List<ParseObject> parseObjectList = [];
+      for (final element in listSaves) {
         // decode json
-        dynamic object = json.decode(element);
+        final dynamic object = json.decode(element);
         parseObjectList
             .add(ParseObject(object[keyVarClassName]).fromJson(object));
       }
 
       // send parseObjects to server
-      ParseResponse response =
+      final ParseResponse response =
           await ParseObject._saveChildren(parseObjectList, localClient);
 
       // if success clear all objects
@@ -796,23 +798,23 @@ class ParseObject extends ParseBase implements ParseCloneable {
 
     // delete
     // get json parse saved objects
-    List<String>? listDeletes =
+    final List<String>? listDeletes =
         await coreStore.getStringList(keyParseStoreDeletes);
 
     if (listDeletes != null) {
-      int firstLength = listDeletes.length;
-      List<String> elementsToRemove = [];
-      for (var element in listDeletes) {
+      final int firstLength = listDeletes.length;
+      final List<String> elementsToRemove = [];
+      for (final element in listDeletes) {
         // decode json
-        dynamic object = json.decode(element);
+        final dynamic object = json.decode(element);
 
         // crate parse object
-        ParseObject parseObject = ParseObject(object[keyVarClassName],
+        final ParseObject parseObject = ParseObject(object[keyVarClassName],
                 client: client, autoSendSessionId: autoSendSessionId)
             .fromJson(object);
 
         // delete parse object
-        ParseResponse deleteResponse = await parseObject.delete();
+        final ParseResponse deleteResponse = await parseObject.delete();
 
         if (deleteResponse.success) {
           // remove from list Deletes
@@ -821,7 +823,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
       }
 
       // Remove the elements after the loop
-      for (var elementToRemove in elementsToRemove) {
+      for (final elementToRemove in elementsToRemove) {
         listDeletes.remove(elementToRemove);
       }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 part of '../../parse_server_sdk.dart';
 
 abstract class CoreStore {

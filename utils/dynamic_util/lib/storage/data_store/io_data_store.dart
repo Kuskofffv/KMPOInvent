@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:core/core_dependencies.dart';
 import 'package:core/util/globals.dart';
+import 'package:core/util/worker_manager/worker_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 

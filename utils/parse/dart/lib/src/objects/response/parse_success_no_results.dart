@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 part of '../../../parse_server_sdk.dart';
 
 /// Handles successful responses with no results

@@ -1,9 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
-import 'package:universal_io/io.dart';
 
 import 'package:http/http.dart' as http;
-
 import 'package:parse_server_sdk/parse_server_sdk.dart';
+import 'package:universal_io/io.dart';
 
 import 'http_client_io.dart' if (dart.library.js) 'http_client_js.dart';
 
@@ -93,8 +94,8 @@ class ParseHTTPClient extends ParseClient {
     final http.Response response = await _client.post(
       Uri.parse(path),
       //Convert the stream to a list
-      body: await data?.fold<List<int>>(<int>[],
-          (List<int> previous, List<int> element) => previous..addAll(element)),
+      body: await data?.fold<List<int>>(
+          <int>[], (previous, element) => previous..addAll(element)),
       headers: options?.headers,
     );
     return ParseNetworkResponse(
@@ -150,8 +151,7 @@ class _ParseHTTPClient extends http.BaseClient {
 
     /// If developer wants to add custom headers, extend this class and add headers needed.
     if (additionalHeaders != null && additionalHeaders!.isNotEmpty) {
-      additionalHeaders!
-          .forEach((String key, String value) => request.headers[key] = value);
+      additionalHeaders!.forEach((key, value) => request.headers[key] = value);
     }
 
     if (parseCoreData.debug) {
@@ -167,17 +167,17 @@ class _ParseHTTPClient extends http.BaseClient {
     String curlCmd = 'curl';
     curlCmd += ' -X ${request.method}';
     bool compressed = false;
-    request.headers.forEach((String name, String value) {
+    request.headers.forEach((name, value) {
       if (name.toLowerCase() == 'accept-encoding' &&
           value.toLowerCase() == 'gzip') {
         compressed = true;
       }
-      curlCmd += ' -H \'$name: $value\'';
+      curlCmd += " -H '$name: $value'";
     });
     if (request.method == 'POST' || request.method == 'PUT') {
       if (request is http.Request) {
         final String body = latin1.decode(request.bodyBytes);
-        curlCmd += ' -d \'$body\'';
+        curlCmd += " -d '$body'";
       }
     }
 

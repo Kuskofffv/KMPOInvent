@@ -6,7 +6,7 @@ List _convertJSONArrayToList(List<dynamic> array) {
 
 Map<String, dynamic> _convertJSONObjectToMap(Map<String, dynamic> object) {
   final Map<String, dynamic> map = <String, dynamic>{};
-  object.forEach((String key, dynamic value) {
+  object.forEach((key, dynamic value) {
     map.putIfAbsent(key, () => parseDecode(value));
   });
   return map;

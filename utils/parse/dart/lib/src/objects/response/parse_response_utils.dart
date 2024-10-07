@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 part of '../../../parse_server_sdk.dart';
 
 /// Handles an API response and logs data if [bool] debug is enabled

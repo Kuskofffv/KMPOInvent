@@ -1,3 +1,5 @@
+// ignore_for_file: use_string_buffers, parameter_assignments, cascade_invocations, avoid_positional_boolean_parameters, only_throw_errors
+
 part of '../../parse_server_sdk.dart';
 
 /// Class to create complex queries
@@ -10,15 +12,15 @@ class QueryBuilder<T extends ParseObject> {
   }
 
   QueryBuilder.or(this.object, List<QueryBuilder<T>> list) {
-    _constructorInitializer(query: '"\$or":[', list: list);
+    _constructorInitializer(query: r'"$or":[', list: list);
   }
 
   QueryBuilder.and(this.object, List<QueryBuilder<T>> list) {
-    _constructorInitializer(query: '"\$and":[', list: list);
+    _constructorInitializer(query: r'"$and":[', list: list);
   }
 
   QueryBuilder.nor(this.object, List<QueryBuilder<T>> list) {
-    _constructorInitializer(query: '"\$nor":[', list: list);
+    _constructorInitializer(query: r'"$nor":[', list: list);
   }
 
   void _constructorInitializer(
@@ -34,12 +36,12 @@ class QueryBuilder<T extends ParseObject> {
   }
 
   factory QueryBuilder.copy(QueryBuilder<T> query) {
-    QueryBuilder<T> copy = QueryBuilder(query.object);
+    final QueryBuilder<T> copy = QueryBuilder(query.object);
     copy.queries = query.queries
-        .map((MapEntry<String, dynamic> entry) =>
+        .map((entry) =>
             MapEntry<String, dynamic>(entry.key, entry.value.toString()))
         .toList();
-    query.limiters.forEach((String key, dynamic value) =>
+    query.limiters.forEach((key, dynamic value) =>
         copy.limiters.putIfAbsent(key, () => value.toString()));
     return copy;
   }
@@ -167,28 +169,28 @@ class QueryBuilder<T extends ParseObject> {
   /// value
   void whereLessThan(String column, dynamic value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$lt'));
+        MapEntry<String, dynamic>(column, value), r'$lt'));
   }
 
   /// Returns an object where the [String] column contains a value less or equal
   /// to than value
   void whereLessThanOrEqualTo(String column, dynamic value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$lte'));
+        MapEntry<String, dynamic>(column, value), r'$lte'));
   }
 
   /// Returns an object where the [String] column contains a value greater
   /// than value
   void whereGreaterThan(String column, dynamic value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$gt'));
+        MapEntry<String, dynamic>(column, value), r'$gt'));
   }
 
   /// Returns an object where the [String] column contains a value greater
   /// than equal to value
   void whereGreaterThanOrEqualsTo(String column, dynamic value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$gte'));
+        MapEntry<String, dynamic>(column, value), r'$gte'));
   }
 
   /// Add a constraint to the query that requires a particular [column]'s value
@@ -199,25 +201,25 @@ class QueryBuilder<T extends ParseObject> {
     }
 
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$ne'));
+        MapEntry<String, dynamic>(column, value), r'$ne'));
   }
 
   /// Returns an object where the [String] column is containedIn
   void whereContainedIn(String column, List<dynamic> value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$in'));
+        MapEntry<String, dynamic>(column, value), r'$in'));
   }
 
   /// Returns an object where the [String] column is notContainedIn
   void whereNotContainedIn(String column, List<dynamic> value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$nin'));
+        MapEntry<String, dynamic>(column, value), r'$nin'));
   }
 
   /// Returns an object where the [String] column for the object has data correctly entered/saved
   void whereValueExists(String column, bool value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$exists'));
+        MapEntry<String, dynamic>(column, value), r'$exists'));
   }
 
   /// Retrieves related objets where [String] column is a relation field to the class [String] className
@@ -229,26 +231,26 @@ class QueryBuilder<T extends ParseObject> {
   /// Returns an object where the [String] column contains select
   void selectKeys(String column, dynamic value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$select'));
+        MapEntry<String, dynamic>(column, value), r'$select'));
   }
 
   /// Returns an object where the [String] column doesn't select
   void dontSelectKeys(String column, dynamic value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$dontSelect'));
+        MapEntry<String, dynamic>(column, value), r'$dontSelect'));
   }
 
   /// Returns an object where the [String] column contains all
   void whereArrayContainsAll(String column, List<dynamic> value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$all'));
+        MapEntry<String, dynamic>(column, value), r'$all'));
   }
 
   /// Returns an object where the [String] column has a regEx performed on,
   /// this can include ^StringsWith, or ^EndsWith. This can be manipulated to the users desire
   void regEx(String column, String value) {
     queries.add(_buildQueryWithColumnValueAndOperator(
-        MapEntry<String, dynamic>(column, value), '\$regex'));
+        MapEntry<String, dynamic>(column, value), r'$regex'));
   }
 
   /// Add a constraint for finding String values that contain the provided
@@ -284,8 +286,8 @@ class QueryBuilder<T extends ParseObject> {
     queries.add(MapEntry<String, dynamic>(_singleQuery,
         '"$column":{"\$text":{"\$search":{"\$term": "$searchTerm", "\$caseSensitive": $caseSensitive , "\$diacriticSensitive": $diacriticSensitive }}}'));
     if (orderByScore) {
-      orderByAscending('\$score');
-      keysToReturn(['\$score']);
+      orderByAscending(r'$score');
+      keysToReturn([r'$score']);
     }
   }
 
@@ -347,8 +349,8 @@ class QueryBuilder<T extends ParseObject> {
     if (points.length < 3) {
       throw ArgumentError('Polygon must have at least 3 points');
     }
-    Map<String, dynamic> dictionary = <String, dynamic>{};
-    dictionary['\$polygon'] = points.map((e) => e.toJson()).toList();
+    final Map<String, dynamic> dictionary = <String, dynamic>{};
+    dictionary[r'$polygon'] = points.map((e) => e.toJson()).toList();
 
     queries.add(MapEntry<String, dynamic>(
         _singleQuery, '"$column":{"\$geoWithin":${jsonEncode(dictionary)}}'));
@@ -454,7 +456,7 @@ class QueryBuilder<T extends ParseObject> {
   /// Builds the query relational for Parse
   String _buildQueryRelational(String className) {
     queries = _checkForMultipleColumnInstances(queries);
-    String lim = getLimitersRelational(limiters);
+    final String lim = getLimitersRelational(limiters);
     return '{"where":{${buildQueries(queries)}},"className":"$className"${limiters.isNotEmpty ? ',"$lim"' : ''}}';
   }
 
@@ -531,16 +533,16 @@ class QueryBuilder<T extends ParseObject> {
         keysAlreadyCompacted.add(query.key);
 
         // Build a list of all queries with the same column name
-        final List<MapEntry<String, dynamic>> listOfQueriesCompact = queries
-            .where((MapEntry<String, dynamic> entry) => query.key == entry.key)
-            .toList();
+        final List<MapEntry<String, dynamic>> listOfQueriesCompact =
+            queries.where((entry) => query.key == entry.key).toList();
 
         // Build first part of query
         String queryStart = '"${query.key}":';
         String queryEnd = '';
 
         // Compact all the queries in the correct format
-        for (MapEntry<String, dynamic> queryToCompact in listOfQueriesCompact) {
+        for (final MapEntry<String, dynamic> queryToCompact
+            in listOfQueriesCompact) {
           String queryToCompactValue = queryToCompact.value.toString();
           queryToCompactValue = queryToCompactValue.replaceFirst('{', '');
           queryToCompactValue = queryToCompactValue.replaceRange(
@@ -563,7 +565,7 @@ class QueryBuilder<T extends ParseObject> {
   /// Adds the limiters to the query, i.e. skip=10, limit=10
   String getLimiters(Map<String, dynamic> map) {
     String result = '';
-    map.forEach((String key, dynamic value) {
+    map.forEach((key, dynamic value) {
       result = '$result&$key=$value';
     });
     return result;
@@ -572,7 +574,7 @@ class QueryBuilder<T extends ParseObject> {
   /// Adds extra options to the query
   String getExtraOptions(Map<String, dynamic> map) {
     String result = '';
-    map.forEach((String key, dynamic value) {
+    map.forEach((key, dynamic value) {
       result = '$result&$key=$value';
     });
     return result;
@@ -581,7 +583,7 @@ class QueryBuilder<T extends ParseObject> {
   /// Adds the limiters to the query relational, i.e. skip=10, limit=10
   String getLimitersRelational(Map<String, dynamic> map) {
     String result = '';
-    map.forEach((String key, dynamic value) {
+    map.forEach((key, dynamic value) {
       if (result.isNotEmpty) {
         result = '$result,"$key":$value';
       } else {
@@ -594,7 +596,7 @@ class QueryBuilder<T extends ParseObject> {
   /// Find the first object that satisfies the query.
   /// Returns null, if no object is found.
   Future<T?> first() async {
-    ParseResponse parseResponse =
+    final ParseResponse parseResponse =
         await (QueryBuilder.copy(this)..setLimit(1)).query();
     if (parseResponse.success) {
       return parseResponse.results?.first;
@@ -605,7 +607,7 @@ class QueryBuilder<T extends ParseObject> {
   /// Find the objects that satisfy the query.
   /// Returns an empty list if no objects are found.
   Future<List<T>> find() async {
-    ParseResponse parseResponse = await query();
+    final ParseResponse parseResponse = await query();
     if (parseResponse.success) {
       return parseResponse.results?.map((e) => e as T).toList() ?? <T>[];
     }

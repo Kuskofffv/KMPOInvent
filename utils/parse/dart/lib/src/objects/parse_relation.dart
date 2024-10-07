@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_setters_without_getters, avoid_returning_this
+
 part of '../../parse_server_sdk.dart';
 
 abstract class ParseRelation<T extends ParseObject> {
@@ -104,7 +106,7 @@ class _ParseRelation<T extends ParseObject>
     final parentObjectId = parent!.objectId;
 
     if (parentObjectId == null) {
-      throw ParseRelationException(
+      throw const ParseRelationException(
           'The parent objectId is null. Query based on a Relation require ObjectId');
     }
 
@@ -155,7 +157,7 @@ class _ParseRelation<T extends ParseObject>
     _targetClass ??= targetClass;
 
     if (_targetClass != targetClass) {
-      throw ParseRelationException(
+      throw const ParseRelationException(
           'The target class can not be modified if it is already set');
     }
   }

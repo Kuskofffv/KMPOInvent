@@ -33,11 +33,11 @@ extension StringExtensions on String? {
   }
 
   /// Returns the value of this number as an [double]
-  double toDouble() => double.parse(this!);
+  double uble() => double.parse(this!);
 
   /// Returns the value of this number as an [double]
   /// or null if can not be parsed.
-  double? toDoubleOrNull() {
+  double? ubleOrNull() {
     if (this == null) {
       return null;
     }

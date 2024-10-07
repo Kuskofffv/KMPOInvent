@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_returning_this, cascade_invocations
+
 part of '../../parse_server_sdk.dart';
 
 class _ParseArray implements _Valuable<List>, _ParseSaveStateAwareChild {

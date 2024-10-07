@@ -1,10 +1,10 @@
 library flutter_parse_sdk_flutter;
 
-import 'dart:convert';
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
-import 'package:path/path.dart' as path;
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,18 +12,19 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart' as sdk;
 import 'package:parse_server_sdk_flutter/src/storage/core_store_directory_io.dart'
     if (dart.library.html) 'package:parse_server_sdk_flutter/src/storage/core_store_directory_web.dart';
+import 'package:path/path.dart' as path;
 import 'package:sembast/sembast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 export 'package:parse_server_sdk/parse_server_sdk.dart'
     hide Parse, CoreStoreSembastImp;
 
-part 'src/storage/core_store_shared_preferences.dart';
-part 'src/storage/core_store_sembast.dart';
-part 'src/utils/parse_live_grid.dart';
-part 'src/utils/parse_live_list.dart';
 part 'src/notification/parse_notification.dart';
 part 'src/push//parse_push.dart';
+part 'src/storage/core_store_sembast.dart';
+part 'src/storage/core_store_shared_preferences.dart';
+part 'src/utils/parse_live_grid.dart';
+part 'src/utils/parse_live_list.dart';
 
 class Parse extends sdk.Parse
     with WidgetsBindingObserver
@@ -116,6 +117,7 @@ class Parse extends sdk.Parse
         return sdk.ParseConnectivityResult.mobile;
       case ConnectivityResult.none:
         return sdk.ParseConnectivityResult.none;
+      // ignore: no_default_cases
       default:
         return sdk.ParseConnectivityResult.wifi;
     }
@@ -123,12 +125,13 @@ class Parse extends sdk.Parse
 
   @override
   Stream<sdk.ParseConnectivityResult> get connectivityStream {
-    return Connectivity().onConnectivityChanged.map((ConnectivityResult event) {
+    return Connectivity().onConnectivityChanged.map((event) {
       switch (event) {
         case ConnectivityResult.wifi:
           return sdk.ParseConnectivityResult.wifi;
         case ConnectivityResult.mobile:
           return sdk.ParseConnectivityResult.mobile;
+        // ignore: no_default_cases
         default:
           return sdk.ParseConnectivityResult.none;
       }

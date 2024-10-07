@@ -1,3 +1,5 @@
+// ignore_for_file: use_setters_to_change_properties
+
 part of '../../parse_server_sdk.dart';
 
 typedef ParseObjectConstructor = ParseObject Function();
