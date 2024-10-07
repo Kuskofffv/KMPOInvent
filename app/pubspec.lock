@@ -1158,12 +1158,13 @@ packages:
     source: hosted
     version: "1.1.5"
   worker_manager:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../utils/worker_manager"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: worker_manager
+      sha256: "334262e1b43dfb2097290098bbe8d868540b9dee484e4f0b5372b0d31d99efa1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.1"
   xdg_directories:
     dependency: transitive
     description:
