@@ -321,22 +321,10 @@ class _InventScreenState extends State<InventScreen> {
                   child: Card(
                     color: objectColors[number],
                     child: ListTile(
-                      // leading: const Icon(
-                      //   Icons.qr_code_outlined,
-                      //   color: Colors.white,
-                      // ),
-                      // trailing: const Icon(
-                      //   Icons.camera_alt,
-                      //   color: Colors.white,
-                      // ),
                       title: Text(
                         '$number\n$name${place != null ? "\n$place" : ""}\n$createdAtStr\nКол-во: $count${(objectCounts[number] ?? 0) != 0 ? "\n\nПросканированно: ${objectCounts[number]}" : ""}',
                         style: const TextStyle(color: Colors.white),
                       ),
-                      // subtitle: Text(
-                      //   '$place - $name ($createdAtStr)',
-                      //   style: const TextStyle(color: Colors.white),
-                      // ),
                       onTap: () async {
                         await SRRouter.push(
                             context, ScanInfoDynamicScreen(data: item));

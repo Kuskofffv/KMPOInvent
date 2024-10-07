@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:brigantina_invent/domain/object.dart';
 import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/import/inspect_imported_objects_screen.dart';
 import 'package:brigantina_invent/utils/parse_util.dart';
 import 'package:brigantina_invent/utils/util.dart';
 import 'package:brigantina_invent/widget/loader_widget.dart';
@@ -159,11 +157,10 @@ class _ImportScreenState extends State<ImportScreen> {
                       });
 
                       if (objects != null) {
-                        AppUtil.toast("Экспорт завершен");
-                        unawaited(SRRouter.pushReplacement(context,
-                            InspectImportedObjectsScreen(objects: objects)));
+                        AppUtil.toast("Импорт завершен");
+                        SRRouter.pop(context);
                       } else {
-                        AppUtil.toast("Ошибка экспорта", isError: true);
+                        AppUtil.toast("Ошибка импорта", isError: true);
                       }
                     },
                     child: const Text("Выбор файла")),

@@ -9,9 +9,6 @@ import http from 'http';
 import ParseDashboard from 'parse-dashboard';
 import FSFilesAdapter from '@parse/fs-files-adapter';
 import cors from 'cors';
-import fs from 'fs';
-import bodyParser from 'body-parser'
-import request from 'request';
 import dotenv from 'dotenv';
 import { Server } from "socket.io";
 import os from 'os';
@@ -86,8 +83,6 @@ app.set('trust proxy', true);
 
 app.use(cors());
 
-//app.use('/public', express.static(path.join(__dirname, '/public')));
-
 const mountPath = '/parse/api';
 const server = new ParseServer(config);
 await server.start();
@@ -136,16 +131,3 @@ statIo.on('connection', (socket) => {
 statServer.listen(3000, () => {
   console.log('Stat server is running on port 3000');
 });
-
-async function _sendPasswordWithUnisender(email, bodyStr) {
-  const key = "6k411zoazdano1qqxrturuunaf8t196wffidrrby";
-  const body = encodeURIComponent(bodyStr);
-  const url =
-            "https://api.unisender.com/ru/api/sendEmail?format=json&api_key="+key+"&email="+email+"&sender_name=SemesterRus&sender_email=d.berezin88@gmail.com&subject=Authorization&body="+body+"&list_id=1";
-  const response = await axios.get(url);
-  console.log("send email " + response.status + " " + response.statusText);
-  if(response.status >= 300) {
-    throw {message: response.data};
-  }
-  return response.data; 
-}

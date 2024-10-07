@@ -5,7 +5,6 @@ import 'package:brigantina_invent/screens/auth/auth_screen.dart';
 import 'package:brigantina_invent/screens/home_page.dart';
 import 'package:brigantina_invent/services/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
 

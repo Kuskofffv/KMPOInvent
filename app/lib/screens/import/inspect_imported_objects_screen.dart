@@ -94,8 +94,6 @@ class _InspectImportedObjectsScreenState
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ElevatedButton(
-                          // color: Colors.green,
-                          // padding: const EdgeInsets.all(20.0),
                           onPressed: () async {
                             try {
                               final boundary = qrKey.currentContext!
@@ -137,7 +135,6 @@ class _InspectImportedObjectsScreenState
                           height: 20,
                         ),
                         ElevatedButton(
-                          // padding: const EdgeInsets.all(15.0),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black54,
                           ),

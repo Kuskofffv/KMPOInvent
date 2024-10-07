@@ -31,15 +31,11 @@ dependencies:
   excel: ^3.0.0
   parse_server_sdk: any
   parse_server_sdk_flutter: any
-  toastification: ^2.1.0
+  toastification: ^2.3.0
   flutter_sticky_header: ^0.6.5
   flutter_launcher_icons: ^0.13.1
-  image_to_pdf_converter: any
   pdf: ^3.11.1
   scroll_to_index: ^3.0.1
-
-dependency_overrides:
-  #xml: ^5.4.0
 
 dev_dependencies:
   flutter_test:
