@@ -99,7 +99,7 @@ class _ScanEditStatePage extends State<ScanEditScreen> {
                           TextFormField(
                             controller: _nameField,
                             decoration: const InputDecoration(
-                              hintText: "Компьютерный стол",
+                              hintText: "Коммутатор Cisco",
                             ),
                             validator: (value) {
                               if (value.isNullOrEmpty()) {
