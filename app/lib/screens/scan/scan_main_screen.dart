@@ -1,9 +1,9 @@
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/objects/inspect_added_object_screen.dart';
-import 'package:brigantina_invent/screens/scan/scan_edit_screen.dart';
-import 'package:brigantina_invent/screens/scan/scan_info_screen.dart';
-import 'package:brigantina_invent/utils/util.dart';
-import 'package:brigantina_invent/widget/loader_widget.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/objects/inspect_added_object_screen.dart';
+import 'package:kmpo_invent/screens/scan/scan_edit_screen.dart';
+import 'package:kmpo_invent/screens/scan/scan_info_screen.dart';
+import 'package:kmpo_invent/utils/util.dart';
+import 'package:kmpo_invent/widget/loader_widget.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';

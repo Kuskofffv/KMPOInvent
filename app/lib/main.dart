@@ -1,9 +1,9 @@
-import 'package:brigantina_invent/domain/const.dart';
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/auth/landing_screen.dart';
-import 'package:brigantina_invent/services/auth.dart';
-import 'package:brigantina_invent/utils/adaptation_util.dart';
-import 'package:brigantina_invent/widget/adaptation.dart';
+import 'package:kmpo_invent/domain/const.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/auth/landing_screen.dart';
+import 'package:kmpo_invent/services/auth.dart';
+import 'package:kmpo_invent/utils/adaptation_util.dart';
+import 'package:kmpo_invent/widget/adaptation.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/auth/auth_screen.dart';
-import 'package:brigantina_invent/screens/home_page.dart';
-import 'package:brigantina_invent/services/auth.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/auth/auth_screen.dart';
+import 'package:kmpo_invent/screens/home_page.dart';
+import 'package:kmpo_invent/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';

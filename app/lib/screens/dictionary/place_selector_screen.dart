@@ -1,4 +1,4 @@
-import 'package:brigantina_invent/widget/loader_widget.dart';
+import 'package:kmpo_invent/widget/loader_widget.dart';
 
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';

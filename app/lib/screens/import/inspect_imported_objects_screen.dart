@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
-import 'package:brigantina_invent/domain/object.dart';
-import 'package:brigantina_invent/utils/util.dart';
+import 'package:kmpo_invent/domain/object.dart';
+import 'package:kmpo_invent/utils/util.dart';
 import 'package:core/util/globals.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/foundation.dart';

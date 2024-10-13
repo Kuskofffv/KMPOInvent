@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:brigantina_invent/domain/user.dart';
+import 'package:kmpo_invent/domain/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 

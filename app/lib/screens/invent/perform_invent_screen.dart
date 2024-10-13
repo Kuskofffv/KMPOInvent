@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/scan/scan_info_screen.dart';
-import 'package:brigantina_invent/utils/date.dart';
-import 'package:brigantina_invent/utils/util.dart';
-import 'package:brigantina_invent/widget/loader_widget.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/scan/scan_info_screen.dart';
+import 'package:kmpo_invent/utils/date.dart';
+import 'package:kmpo_invent/utils/util.dart';
+import 'package:kmpo_invent/widget/loader_widget.dart';
 import 'package:core/core_dependencies.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';

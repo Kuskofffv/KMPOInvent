@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/utils/parse_util.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/utils/parse_util.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

@@ -1,6 +1,6 @@
-import 'package:brigantina_invent/services/qr.dart';
-import 'package:brigantina_invent/utils/parse_util.dart';
-import 'package:brigantina_invent/widget/loader_widget.dart';
+import 'package:kmpo_invent/services/qr.dart';
+import 'package:kmpo_invent/utils/parse_util.dart';
+import 'package:kmpo_invent/widget/loader_widget.dart';
 import 'package:core/core_dependencies.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:flutter/material.dart';

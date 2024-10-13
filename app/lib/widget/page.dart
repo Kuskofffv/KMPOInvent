@@ -1,5 +1,5 @@
 //some service pages here
-import 'package:brigantina_invent/widget/adaptation.dart';
+import 'package:kmpo_invent/widget/adaptation.dart';
 import 'package:core/util/exception/exception_parser.dart';
 import 'package:core/util/theme/colors.dart';
 import 'package:flutter/material.dart';

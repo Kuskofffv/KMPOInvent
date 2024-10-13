@@ -1,4 +1,4 @@
-package com.brigantina.invent
+package com.kmpo.invent
 
 import io.flutter.embedding.android.FlutterActivity
 

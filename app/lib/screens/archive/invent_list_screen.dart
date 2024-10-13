@@ -1,6 +1,6 @@
-import 'package:brigantina_invent/screens/archive/invent_info_screen.dart';
-import 'package:brigantina_invent/utils/date.dart';
-import 'package:brigantina_invent/widget/loader_widget.dart';
+import 'package:kmpo_invent/screens/archive/invent_info_screen.dart';
+import 'package:kmpo_invent/utils/date.dart';
+import 'package:kmpo_invent/widget/loader_widget.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';

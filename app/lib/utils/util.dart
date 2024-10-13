@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:brigantina_invent/domain/const.dart';
+import 'package:kmpo_invent/domain/const.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

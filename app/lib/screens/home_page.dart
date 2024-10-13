@@ -1,14 +1,14 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:brigantina_invent/screens/about_app.dart';
-import 'package:brigantina_invent/screens/dictionary/places_screen.dart';
-import 'package:brigantina_invent/screens/import/import_screen.dart';
-import 'package:brigantina_invent/screens/objects/add_object_screen.dart';
-import 'package:brigantina_invent/screens/objects/all_objects_screen.dart';
-import 'package:brigantina_invent/screens/scan/scan_main_screen.dart';
-import 'package:brigantina_invent/services/auth.dart';
-import 'package:brigantina_invent/utils/util.dart';
+import 'package:kmpo_invent/screens/about_app.dart';
+import 'package:kmpo_invent/screens/dictionary/places_screen.dart';
+import 'package:kmpo_invent/screens/import/import_screen.dart';
+import 'package:kmpo_invent/screens/objects/add_object_screen.dart';
+import 'package:kmpo_invent/screens/objects/all_objects_screen.dart';
+import 'package:kmpo_invent/screens/scan/scan_main_screen.dart';
+import 'package:kmpo_invent/services/auth.dart';
+import 'package:kmpo_invent/utils/util.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,8 +1,8 @@
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/invent/end_invent_screen.dart';
-import 'package:brigantina_invent/utils/date.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/invent/end_invent_screen.dart';
+import 'package:kmpo_invent/utils/date.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xls;

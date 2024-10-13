@@ -1,4 +1,4 @@
-import 'package:brigantina_invent/screens/scan/scan_edit_screen.dart';
+import 'package:kmpo_invent/screens/scan/scan_edit_screen.dart';
 import 'package:flutter/material.dart';
 
 class AddObjectScreen extends StatelessWidget {

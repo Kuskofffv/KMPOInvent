@@ -1,7 +1,7 @@
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/screens/dictionary/place_selector_screen.dart';
-import 'package:brigantina_invent/screens/objects/inspect_added_object_screen.dart';
-import 'package:brigantina_invent/utils/date.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/dictionary/place_selector_screen.dart';
+import 'package:kmpo_invent/screens/objects/inspect_added_object_screen.dart';
+import 'package:kmpo_invent/utils/date.dart';
 import 'package:common/dependencies.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';

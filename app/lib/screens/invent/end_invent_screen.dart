@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:brigantina_invent/domain/user.dart';
-import 'package:brigantina_invent/utils/date.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/utils/date.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

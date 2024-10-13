@@ -4,7 +4,7 @@ import 'dart:collection';
 import 'dart:core';
 import 'dart:math' as math;
 
-import 'package:brigantina_invent/utils/util.dart';
+import 'package:kmpo_invent/utils/util.dart';
 import 'package:core/util/simple.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
