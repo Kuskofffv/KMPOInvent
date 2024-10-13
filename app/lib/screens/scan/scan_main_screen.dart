@@ -1,11 +1,12 @@
+import 'package:core/util/exception/app_exception.dart';
+import 'package:core/util/routing/router.dart';
+import 'package:flutter/material.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/objects/inspect_added_object_screen.dart';
 import 'package:kmpo_invent/screens/scan/scan_edit_screen.dart';
 import 'package:kmpo_invent/screens/scan/scan_info_screen.dart';
 import 'package:kmpo_invent/utils/util.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +46,8 @@ class _ScanMainScreenState extends State<ScanMainScreen> {
               return data;
             }
 
-            throw Exception('Объект не найден');
+            // ignore: only_throw_errors
+            throw const AppException('Объект не найден');
           },
           builder: (context, snapshot) {
             return Center(

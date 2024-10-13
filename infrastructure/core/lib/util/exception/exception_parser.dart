@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:core/util/exception/app_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -9,53 +10,12 @@ class ExceptionParser {
   ExceptionParser._();
 
   static String parseException(Object exception) {
-    if (exception is ParseError) {
+    if (exception is String) {
+      return exception;
+    } else if (exception is AppException) {
       return exception.message;
-
-      // return switch (exception.code) {
-      //   ParseError.accountAlreadyLinked => "Аккаунт уже привязан",
-      //   ParseError.aggregateError => "Ошибка агрегации",
-      //   ParseError.cacheMiss => "Кэш не найден",
-      //   ParseError.commandUnavailable => "Команда недоступна",
-      //   ParseError.connectionFailed => "Ошибка соединения",
-      //   ParseError.duplicateValue => "Дублирующее значение",
-      //   ParseError.emailMissing => "Email не найден",
-      //   ParseError.emailNotFound => "Email не найден",
-      //   ParseError.emailTaken => "Email занят",
-      //   ParseError.exceededQuota => "Превышена квота",
-      //   ParseError.fileDeleteError => "Ошибка удаления файла",
-      //   ParseError.fileReadError => "Ошибка чтения файла",
-      //   ParseError.fileSaveError => "Ошибка сохранения файла",
-      //   ParseError.incorrectType => "Некорректный тип",
-      //   ParseError.internalServerError => "Внутренняя ошибка сервера",
-      //   ParseError.invalidAcl => "Некорректный ACL",
-      //   ParseError.invalidChannelName => "Некорректное имя канала",
-      //   ParseError.invalidClassName => "Некорректное имя класса",
-      //   ParseError.invalidEmailAddress => "Некорректный email",
-      //   ParseError.invalidEventName => "Некорректное имя события",
-      //   ParseError.invalidFileName => "Некорректное имя файла",
-      //   ParseError.invalidImageData => "Некорректные данные изображения",
-      //   ParseError.invalidJson => "Некорректный JSON",
-      //   ParseError.invalidKeyName => "Некорректное имя ключа",
-      //   ParseError.invalidLinkedSession => "Некорректная привязка сессии",
-      //   ParseError.invalidQuery => "Неверный запрос",
-      //   ParseError.missingObjectId => "Не указан идентификатор объекта",
-      //   ParseError.invalidPointer => "Неверный указатель",
-      //   ParseError.notInitialized =>
-      //     "Вы должны вызвать Parse().initialize перед использованием библиотеки Parse",
-      //   ParseError.pushMisconfigured => "Неправильная конфигурация Push",
-      //   ParseError.objectTooLarge => "Объект слишком большой",
-      //   ParseError.operationForbidden => "Операция запрещена",
-      //   ParseError.invalidNestedKey => "Неверный ключ в вложенном JSONObject",
-      //   ParseError.timeout => "Запрос на сервере завершился по таймауту",
-      //   ParseError.missingContentType => "Отсутствует тип содержимого",
-      //   ParseError.missingContentLength => "Отсутствует длина содержимого",
-      //   ParseError.invalidContentLength => "Неверная длина содержимого",
-      //   ParseError.fileTooLarge => "Файл слишком большой",
-      //   ParseError.invalidRoleName => "Неверное имя роли",
-      //   ParseError.otherCause => "Ошибка соединения",
-      //   _ => "Произошла ошибка"
-      // };
+    } else if (exception is ParseError) {
+      return exception.message;
     } else if (exception is HandshakeException) {
       return 'Ошибка соединения';
     } else if (exception is TimeoutException) {
@@ -133,7 +93,12 @@ class ExceptionParser {
     } else {
       if (exception is Exception) {
         try {
-          return (exception as dynamic).message;
+          final message = (exception as dynamic).message;
+          if (message != null && message != "null") {
+            return message;
+          } else {
+            return exception.toString();
+          }
         } on Object {}
       }
       return 'Неизвестная ошибка';

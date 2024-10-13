@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import 'exception/app_exception.dart';
+
 class DateFormatUtil {
   DateFormatUtil._();
 
@@ -17,7 +19,7 @@ class DateFormatUtil {
       if (code >= 0 && code < 10) {
         i += code;
       } else {
-        throw Exception("${text[startIndex + index]} not int");
+        throw AppException("${text[startIndex + index]} not int");
       }
     }
     return i;

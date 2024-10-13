@@ -307,7 +307,8 @@ class SRRouter {
       onSuccess?.call(result);
       return result;
     } else if (exception != null) {
-      Simple.toast(ExceptionParser.parseException(exception));
+      Simple.toast(ExceptionParser.parseException(exception),
+          backgroundColor: Colors.red, textColor: Colors.white);
     }
     return null;
   }

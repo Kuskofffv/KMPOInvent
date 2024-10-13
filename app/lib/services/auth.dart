@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:core/util/exception/app_exception.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
@@ -69,7 +70,7 @@ class AuthService extends ChangeNotifier {
         ..set("name", fio);
       final response = await parseUser.signUp();
       if (!response.success) {
-        throw Exception(response.error!.message);
+        throw AppException(response.error!.message);
       }
 
       unawaited(parseUser.verificationEmailRequest());

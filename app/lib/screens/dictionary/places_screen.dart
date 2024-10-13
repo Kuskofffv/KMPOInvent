@@ -1,3 +1,4 @@
+import 'package:core/util/exception/app_exception.dart';
 import 'package:kmpo_invent/utils/util.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
 
@@ -59,7 +60,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
                               ..set('name', name.text);
 
                             if (!(await mol.save()).success) {
-                              throw Exception('Ошибка сохранения');
+                              throw const AppException('Ошибка сохранения');
                             }
                             return 0;
                           });
@@ -86,7 +87,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
             final response = await query.query();
 
             if (!response.success) {
-              throw Exception(response.error!.message);
+              throw AppException(response.error!.message);
             }
 
             return List<ParseObject>.from(response.results ?? []);
@@ -116,7 +117,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
                             SRRouter.operationWithToast(
                               operation: () async {
                                 if (!(await mol.delete()).success) {
-                                  throw Exception('Ошибка удаления');
+                                  throw const AppException('Ошибка удаления');
                                 }
                                 return 0;
                               },

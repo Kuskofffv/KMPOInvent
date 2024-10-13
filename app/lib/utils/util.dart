@@ -69,7 +69,7 @@ class AppUtil {
     }
 
     Simple.toast(
-      "Инвентаризация завершена",
+      message,
       backgroundColor: isError ? Const.red : Const.green,
       textColor: Colors.white,
     );

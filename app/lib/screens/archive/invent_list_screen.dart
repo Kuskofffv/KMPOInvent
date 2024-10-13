@@ -1,3 +1,4 @@
+import 'package:core/util/exception/app_exception.dart';
 import 'package:kmpo_invent/screens/archive/invent_info_screen.dart';
 import 'package:kmpo_invent/utils/date.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
@@ -28,7 +29,7 @@ class _InventListStatePage extends State<InventListScreen> {
         final response = await query.query();
 
         if (!response.success) {
-          throw Exception(response.error!.message);
+          throw AppException(response.error!.message);
         }
 
         return List<ParseObject>.from(response.results ?? []);

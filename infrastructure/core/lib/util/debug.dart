@@ -1,3 +1,5 @@
+import 'exception/app_exception.dart';
+
 class TDebug {
   TDebug._();
 
@@ -12,7 +14,7 @@ class TDebug {
     return () async {
       if (_errorKeys.add(key)) {
         await Future.delayed(const Duration(seconds: 2));
-        throw Exception('Error $key');
+        throw AppException('Error $key');
       }
       return operation();
     };

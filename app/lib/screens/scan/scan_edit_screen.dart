@@ -1,3 +1,4 @@
+import 'package:core/util/exception/app_exception.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/dictionary/place_selector_screen.dart';
 import 'package:kmpo_invent/screens/objects/inspect_added_object_screen.dart';
@@ -213,7 +214,8 @@ class _ScanEditStatePage extends State<ScanEditScreen> {
                           ..set("location", _locationField.text);
 
                         if (!(await parseObject.save()).success) {
-                          throw Exception("Не удалось сохранить объект");
+                          throw const AppException(
+                              "Не удалось сохранить объект");
                         }
 
                         return parseObject;

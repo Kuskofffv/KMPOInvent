@@ -1,15 +1,16 @@
 import 'dart:io';
 
-import 'package:kmpo_invent/domain/object.dart';
-import 'package:kmpo_invent/domain/user.dart';
-import 'package:kmpo_invent/utils/parse_util.dart';
-import 'package:kmpo_invent/utils/util.dart';
-import 'package:kmpo_invent/widget/loader_widget.dart';
+import 'package:core/util/exception/app_exception.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:kmpo_invent/domain/object.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/utils/parse_util.dart';
+import 'package:kmpo_invent/utils/util.dart';
+import 'package:kmpo_invent/widget/loader_widget.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -105,7 +106,15 @@ class _ImportScreenState extends State<ImportScreen> {
 
                         final fileName = file.path!;
                         final bytes = File(fileName).readAsBytesSync();
-                        final excel = Excel.decodeBytes(bytes);
+                        final Excel excel;
+
+                        try {
+                          excel = Excel.decodeBytes(bytes);
+                        } catch (e) {
+                          throw const AppException(
+                              "Загружен неподдерживаемый файл");
+                        }
+
                         final objects = <ObjectData>[];
 
                         for (final table in excel.tables.keys) {

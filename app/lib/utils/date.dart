@@ -1,5 +1,6 @@
 // ignore_for_file: parameter_assignments, lines_longer_than_80_chars
 
+import 'package:core/util/exception/app_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -17,7 +18,7 @@ class DateFormatUtil {
       if (code >= 0 && code < 10) {
         i += code;
       } else {
-        throw Exception("${text[startIndex + index]} not int");
+        throw AppException("${text[startIndex + index]} not int");
       }
     }
     return i;

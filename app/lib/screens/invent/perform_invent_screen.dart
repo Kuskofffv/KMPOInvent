@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:core/core_dependencies.dart';
+import 'package:core/util/exception/app_exception.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:core/util/simple.dart';
@@ -112,7 +113,7 @@ class _InventScreenState extends State<InventScreen> {
                     ..set("objects", objects);
 
                   if (!(await parseObject.save()).success) {
-                    throw Exception('Ошибка сохранения');
+                    throw const AppException('Ошибка сохранения');
                   }
                   return parseObject;
                 });
