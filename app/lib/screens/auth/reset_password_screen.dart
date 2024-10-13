@@ -1,10 +1,9 @@
-import 'dart:async';
-
+import 'package:core/util/routing/router.dart';
+import 'package:core/util/simple.dart';
+import 'package:flutter/material.dart';
+import 'package:kmpo_invent/domain/const.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/utils/parse_util.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -111,24 +110,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     });
 
                     if (result != null) {
-                      unawaited(Fluttertoast.showToast(
-                          msg: "Собщение отправлено!!!",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 3,
-                          backgroundColor: Colors.green,
-                          textColor: Colors.white,
-                          fontSize: 16));
+                      toast("Собщение отправлено!!!",
+                          backgroundColor: Const.green,
+                          textColor: Colors.white);
                       SRRouter.pop(context, _emailController.text.trim());
                     } else {
-                      unawaited(Fluttertoast.showToast(
-                          msg: "Попробуйте ввести почту ещё раз",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 3,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16));
+                      toast("Попробуйте ввести почту ещё раз",
+                          backgroundColor: Const.red, textColor: Colors.white);
                     }
                   },
                 ),

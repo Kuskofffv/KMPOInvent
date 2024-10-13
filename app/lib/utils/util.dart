@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:kmpo_invent/domain/const.dart';
+import 'package:core/util/simple.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kmpo_invent/domain/const.dart';
 
 class AppUtil {
   AppUtil._();
@@ -67,14 +67,12 @@ class AppUtil {
     if (message == null) {
       return;
     }
-    Fluttertoast.showToast(
-        msg: message.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 3,
-        backgroundColor: isError ? Const.red : Const.green,
-        textColor: Colors.white,
-        fontSize: 16);
+
+    Simple.toast(
+      "Инвентаризация завершена",
+      backgroundColor: isError ? Const.red : Const.green,
+      textColor: Colors.white,
+    );
   }
 
   static void areYouSure(BuildContext context,

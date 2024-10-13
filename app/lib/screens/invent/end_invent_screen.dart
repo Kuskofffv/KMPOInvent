@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:core/util/routing/router.dart';
+import 'package:core/util/simple.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/utils/date.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:path_provider/path_provider.dart';
@@ -107,14 +107,9 @@ class _EndStatePageInvent extends State<EndInventScreen> {
                     children: [
                       ElevatedButton(
                         onPressed: () async {
-                          unawaited(Fluttertoast.showToast(
-                              msg: "Это может занять несколько секунд",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 5,
+                          toast("Это может занять несколько секунд",
                               backgroundColor: Colors.orange,
-                              textColor: Colors.white,
-                              fontSize: 16));
+                              textColor: Colors.white);
 
                           final xls.Workbook workbook = xls.Workbook();
 

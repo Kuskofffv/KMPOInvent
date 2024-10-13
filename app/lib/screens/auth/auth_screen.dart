@@ -1,12 +1,13 @@
 import 'dart:async';
 
+import 'package:core/util/globals.dart';
+import 'package:core/util/routing/router.dart';
+import 'package:core/util/simple.dart';
+import 'package:flutter/material.dart';
+import 'package:kmpo_invent/domain/const.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/auth/reset_password_screen.dart';
 import 'package:kmpo_invent/services/auth.dart';
-import 'package:core/util/globals.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class AuthorizationPage extends StatefulWidget {
@@ -163,14 +164,8 @@ class _AuthorizationState extends State<AuthorizationPage> {
           await Provider.of<AuthService>(context, listen: false)
               .signInWithEmailAndPassword(_email.trim(), _password.trim());
       if (user == null) {
-        unawaited(Fluttertoast.showToast(
-            msg: "Неправильно ввели почту или пароль",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 3,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16));
+        toast("Неправильно ввели почту или пароль",
+            backgroundColor: Const.red, textColor: Colors.white);
       }
     }
 
@@ -191,26 +186,14 @@ class _AuthorizationState extends State<AuthorizationPage> {
       }
 
       if (!regExpMail.hasMatch(email)) {
-        unawaited(Fluttertoast.showToast(
-            msg: "Неверная почта",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 3,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16));
+        toast("Неверная почта",
+            backgroundColor: Const.red, textColor: Colors.white);
         return;
       }
 
       if (!regExpPass.hasMatch(password)) {
-        unawaited(Fluttertoast.showToast(
-            msg: "Слишком короткий пароль",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 3,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16));
+        toast("Слишком короткий пароль",
+            backgroundColor: Const.red, textColor: Colors.white);
         return;
       }
 
@@ -219,14 +202,8 @@ class _AuthorizationState extends State<AuthorizationPage> {
               .registerWithEmailAndPassword(fio, department, email, password);
 
       if (user == null) {
-        unawaited(Fluttertoast.showToast(
-            msg: "Неправильно ввели почту или пароль",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 3,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16));
+        toast("Неправильно ввели почту или пароль",
+            backgroundColor: Const.red, textColor: Colors.white);
       }
     }
 

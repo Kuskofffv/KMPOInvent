@@ -1,22 +1,23 @@
 import 'dart:async';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:core/core_dependencies.dart';
+import 'package:core/util/extension/extensions.dart';
+import 'package:core/util/routing/router.dart';
+import 'package:core/util/simple.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/scan/scan_info_screen.dart';
 import 'package:kmpo_invent/utils/date.dart';
 import 'package:kmpo_invent/utils/util.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
-import 'package:core/core_dependencies.dart';
-import 'package:core/util/extension/extensions.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
+import '../../domain/const.dart';
 import 'end_invent_screen.dart';
 
 class InventScreen extends StatefulWidget {
@@ -120,14 +121,8 @@ class _InventScreenState extends State<InventScreen> {
                   return;
                 }
 
-                unawaited(Fluttertoast.showToast(
-                    msg: "Инвентаризация завершена",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 3,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16));
+                toast("Инвентаризация завершена",
+                    backgroundColor: Const.red, textColor: Colors.white);
 
                 await SRRouter.pushReplacement(
                     context,
@@ -173,14 +168,9 @@ class _InventScreenState extends State<InventScreen> {
                   (e) => e.stringOpt("number") == result.rawContent);
 
               if (item == null) {
-                unawaited(Fluttertoast.showToast(
-                    msg: "Объект не найден",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 3,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16));
+                toast("Объект не найден",
+                    backgroundColor: Const.red, textColor: Colors.white);
+
                 return;
               }
 
@@ -265,15 +255,11 @@ class _InventScreenState extends State<InventScreen> {
                   objectCounts[result.rawContent] = scanned;
                   objectColors[result.rawContent] = Colors.red;
                 });
-                unawaited(Fluttertoast.showToast(
-                    msg:
-                        "Разница на ${count - scanned} ${Intl.plural(count - value, one: "позицию", few: "позиции", other: "позиций")}",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16));
+
+                toast(
+                    "Разница на ${count - scanned} ${Intl.plural(count - value, one: "позицию", few: "позиции", other: "позиций")}",
+                    backgroundColor: Const.red,
+                    textColor: Colors.white);
               }
             },
             child: const Icon(
