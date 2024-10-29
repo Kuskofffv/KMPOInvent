@@ -5,6 +5,7 @@ import 'package:core/util/routing/router.dart';
 import 'package:core/util/theme/theme_util.dart';
 import 'package:flutter/material.dart';
 import 'package:kmpo_invent/screens/about_app.dart';
+import 'package:kmpo_invent/screens/calendar/calendar_screen.dart';
 import 'package:kmpo_invent/screens/dictionary/places_screen.dart';
 import 'package:kmpo_invent/screens/import/import_screen.dart';
 import 'package:kmpo_invent/screens/objects/add_object_screen.dart';
@@ -63,6 +64,8 @@ class _MyStateHomePage extends State<MyHomePage> {
                 children: <Widget>[
                   _flatButton("Начать инвентаризацию",
                       screen: const InventStartScreen()),
+                  divider,
+                  _flatButton("Календарь", screen: const CalendarScreen()),
                   divider,
                   _flatButton(
                     "Сканируйте QR-код",

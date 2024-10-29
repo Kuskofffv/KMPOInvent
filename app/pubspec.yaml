@@ -35,13 +35,17 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   pdf: ^3.11.1
   scroll_to_index: ^3.0.1
+  flutter_local_notifications: ^17.2.3
+  flutter_neat_and_clean_calendar: ^0.4.15
+  timezone: 0.9.4
+  flutter_timezone: 2.0.1
 
 dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
-  adaptive_icon_background: "#4CAF50"
+  adaptive_icon_background: "#A30236"
   adaptive_icon_foreground: "assets/logo_droid.png"
   ios: true
   image_path: "assets/logo.png"
@@ -81,5 +85,10 @@ flutter:
     - family: AlsHauss
       fonts:
         - asset: assets/fonts/ALSHauss-Regular.ttf
+          weight: 300
+          style: normal
+    - family: Arial
+      fonts:
+        - asset: assets/fonts/Arial.ttf
           weight: 300
           style: normal

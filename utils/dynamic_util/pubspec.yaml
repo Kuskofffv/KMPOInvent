@@ -11,4 +11,4 @@ dependencies:
     sdk: flutter
   common: any
   core: any
-  flutter_secure_storage: 9.0.0
+  flutter_secure_storage: 9.2.2

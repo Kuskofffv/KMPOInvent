@@ -1,14 +1,16 @@
+import 'package:core/util/routing/router.dart';
+import 'package:flutter/material.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/invent/select_objects_invent_screen.dart';
 import 'package:kmpo_invent/utils/parse_util.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SelectMolInventScreen extends StatefulWidget {
   final List<String> names;
-  const SelectMolInventScreen({required this.names, Key? key})
+  final void Function(List<String>, List<String>)? customCallback;
+  const SelectMolInventScreen(
+      {required this.names, Key? key, this.customCallback})
       : super(key: key);
 
   @override
@@ -90,10 +92,16 @@ class _SelectMolInventScreenState extends State<SelectMolInventScreen> {
                       if (_checked.isEmpty) {
                         return;
                       }
-                      SRRouter.pushReplacement(
-                          context,
-                          SelectObjectsInventScreen(
-                              names: widget.names, mols: _checked));
+
+                      if (widget.customCallback != null) {
+                        SRRouter.pop(context);
+                        widget.customCallback!(widget.names, _checked);
+                      } else {
+                        SRRouter.pushReplacement(
+                            context,
+                            SelectObjectsInventScreen(
+                                names: widget.names, mols: _checked));
+                      }
                     },
                     child: const Text("Выбрать")),
               )

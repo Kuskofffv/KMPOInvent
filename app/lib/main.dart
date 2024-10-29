@@ -1,17 +1,23 @@
+import 'dart:async';
+
 import 'package:core/util/routing/router.dart';
 import 'package:core/util/theme/theme_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:kmpo_invent/domain/const.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/auth/landing_screen.dart';
+import 'package:kmpo_invent/screens/calendar/calendar_util.dart';
 import 'package:kmpo_invent/services/auth.dart';
 import 'package:kmpo_invent/utils/adaptation_util.dart';
 import 'package:kmpo_invent/widget/adaptation.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import 'package:toastification/toastification.dart';
 
 Future<void> main() async {
@@ -26,6 +32,8 @@ Future<void> main() async {
     liveQueryUrl: "ws://82.146.47.140:1339/parse/api/",
     autoSendSessionId: true,
   );
+  await _configureLocalTimeZone();
+  unawaited(CalendarUtil.initialize());
   runApp(const MyApp());
 }
 
@@ -77,7 +85,7 @@ class _MyAppState extends State<MyApp> {
 
           final defaultTheme = ThemeData(
               brightness: Brightness.light,
-              fontFamily: "AlsHauss",
+              fontFamily: "Arial",
               useMaterial3: false);
 
           return StreamProvider<MyUser?>.value(
@@ -160,4 +168,10 @@ class _MyAppState extends State<MyApp> {
           );
         });
   }
+}
+
+Future<void> _configureLocalTimeZone() async {
+  tz.initializeTimeZones();
+  final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+  tz.setLocalLocation(tz.getLocation(timeZoneName));
 }

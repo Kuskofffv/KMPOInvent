@@ -86,7 +86,7 @@ class StorageStringList {
 
 /// `StorageListDynamic` is a specialized version of `StorageList`
 /// for persisting lists of `DynamicModel` values.
-class StorageListDynamic {
+abstract class StorageListDynamic {
   static Storage<List<DynamicModel>> create(String name,
       {bool secure = false, bool isEternalCache = false}) {
     return StorageList.create(name, DynamicModel.fromJson,

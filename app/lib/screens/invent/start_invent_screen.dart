@@ -1,13 +1,14 @@
+import 'package:core/util/routing/router.dart';
+import 'package:flutter/material.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/invent/select_mol_invent_screen.dart';
 import 'package:kmpo_invent/utils/parse_util.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class InventStartScreen extends StatefulWidget {
-  const InventStartScreen({Key? key}) : super(key: key);
+  final void Function(List<String>, List<String>)? customCallback;
+  const InventStartScreen({Key? key, this.customCallback}) : super(key: key);
 
   @override
   _InventStartScreenState createState() => _InventStartScreenState();
@@ -86,7 +87,11 @@ class _InventStartScreenState extends State<InventStartScreen> {
                         return;
                       }
                       SRRouter.pushReplacement(
-                          context, SelectMolInventScreen(names: _checked));
+                          context,
+                          SelectMolInventScreen(
+                            names: _checked,
+                            customCallback: widget.customCallback,
+                          ));
                     },
                     child: const Text("Выбрать")),
               )
