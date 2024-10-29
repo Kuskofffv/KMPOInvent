@@ -1,14 +1,15 @@
+import 'package:core/util/routing/router.dart';
+import 'package:core/util/theme/theme_util.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kmpo_invent/domain/const.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/auth/landing_screen.dart';
 import 'package:kmpo_invent/services/auth.dart';
 import 'package:kmpo_invent/utils/adaptation_util.dart';
 import 'package:kmpo_invent/widget/adaptation.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
@@ -74,6 +75,11 @@ class _MyAppState extends State<MyApp> {
             );
           }
 
+          final defaultTheme = ThemeData(
+              brightness: Brightness.light,
+              fontFamily: "AlsHauss",
+              useMaterial3: false);
+
           return StreamProvider<MyUser?>.value(
             initialData: value.data != null
                 ? MyUser.fromParseUser(value.data as ParseUser)
@@ -101,19 +107,19 @@ class _MyAppState extends State<MyApp> {
                       });
                 },
                 home: LandingScreen(),
-                theme: ThemeData.light(useMaterial3: false).copyWith(
+                theme: defaultTheme.copyWith(
                     colorScheme: const ColorScheme.light(
-                      primary: Colors.green,
-                      secondary: Colors.green,
+                      primary: ThemeUtil.accent,
+                      secondary: ThemeUtil.accent,
                     ),
                     appBarTheme: const AppBarTheme(
-                      backgroundColor: Colors.green,
-                      centerTitle: true,
+                      backgroundColor: ThemeUtil.accent,
                       titleTextStyle: TextStyle(
                         fontFamily: 'Oswald',
-                        fontSize: 26,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
+                      centerTitle: true,
                     ),
                     elevatedButtonTheme: ElevatedButtonThemeData(
                       style: ElevatedButton.styleFrom(
@@ -124,6 +130,7 @@ class _MyAppState extends State<MyApp> {
                           textStyle: const TextStyle(
                               color: Const.white,
                               fontWeight: FontWeight.bold,
+                              fontFamily: "AlsHauss",
                               fontSize: 18)),
                     ),
                     textButtonTheme: TextButtonThemeData(
@@ -136,7 +143,17 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     inputDecorationTheme: const InputDecorationTheme(
-                      hintStyle: TextStyle(color: Colors.black26),
+                      hintStyle: TextStyle(fontSize: 18, color: Colors.black26),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color:
+                              ThemeUtil.accent, // Замените на нужный вам цвет
+                          width: 2,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black45, width: 1),
+                      ),
                     )),
               ),
             ),

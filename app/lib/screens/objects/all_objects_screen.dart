@@ -1,10 +1,10 @@
+import 'package:core/core_dependencies.dart';
+import 'package:core/util/routing/router.dart';
+import 'package:flutter/material.dart';
 import 'package:kmpo_invent/screens/objects/select_mol_print_screen.dart';
 import 'package:kmpo_invent/screens/scan/scan_main_screen.dart';
 import 'package:kmpo_invent/utils/parse_util.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
-import 'package:core/core_dependencies.dart';
-import 'package:core/util/routing/router.dart';
-import 'package:flutter/material.dart';
 
 class AllObjectsScreen extends StatefulWidget {
   const AllObjectsScreen({Key? key}) : super(key: key);
@@ -23,11 +23,6 @@ class _AllObjectsScreenState extends State<AllObjectsScreen> {
         appBar: AppBar(
           title: const Text(
             'Объекты',
-            style: TextStyle(
-              fontSize: 21,
-              fontFamily: 'Oswald',
-              fontWeight: FontWeight.bold,
-            ),
           ),
           actions: [
             IconButton(
@@ -50,7 +45,10 @@ class _AllObjectsScreenState extends State<AllObjectsScreen> {
                 padding: const EdgeInsets.all(16),
                 child: TextField(
                   decoration: const InputDecoration(
-                      hintText: "Поиск", prefixIcon: Icon(Icons.search)),
+                    hintText: "Поиск",
+                    prefixIcon: Icon(Icons.search),
+                    contentPadding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                  ),
                   controller: _textController,
                   onChanged: (value) {
                     setState(() {

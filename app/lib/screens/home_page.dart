@@ -2,6 +2,7 @@
 
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:core/util/routing/router.dart';
+import 'package:core/util/theme/theme_util.dart';
 import 'package:flutter/material.dart';
 import 'package:kmpo_invent/screens/about_app.dart';
 import 'package:kmpo_invent/screens/dictionary/places_screen.dart';
@@ -99,7 +100,7 @@ class _MyStateHomePage extends State<MyHomePage> {
                   divider,
                   _flatButton(
                     "Выйти из аккаунта",
-                    color: Colors.black54,
+                    color: ThemeUtil.black80,
                     onPressed: () {
                       AppUtil.areYouSure(
                         context,

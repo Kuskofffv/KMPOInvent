@@ -36,8 +36,6 @@ class _SelectMolPrintScreenState extends State<SelectMolPrintScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          backgroundColor: Colors.green,
-          centerTitle: true,
         ),
         body: LoaderWidget(operation: () {
           return parseFunc("usernames");

@@ -60,17 +60,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 controller: _emailController,
                 style: const TextStyle(fontSize: 20),
                 decoration: const InputDecoration(
-                  hintStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black26),
                   hintText: 'Электронная почта',
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black, width: 3),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black45, width: 1),
-                  ),
                   prefixIcon: Padding(
                     padding: EdgeInsets.only(left: 10, right: 10),
                     child: IconTheme(

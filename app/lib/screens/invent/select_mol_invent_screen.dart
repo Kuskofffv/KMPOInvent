@@ -38,8 +38,6 @@ class _SelectMolInventScreenState extends State<SelectMolInventScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          backgroundColor: Colors.green,
-          centerTitle: true,
         ),
         body: LoaderWidget(operation: () {
           return parseFunc("usernames");

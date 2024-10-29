@@ -1,13 +1,13 @@
-import 'package:core/util/exception/app_exception.dart';
-import 'package:kmpo_invent/domain/user.dart';
-import 'package:kmpo_invent/screens/dictionary/place_selector_screen.dart';
-import 'package:kmpo_invent/screens/objects/inspect_added_object_screen.dart';
-import 'package:kmpo_invent/utils/date.dart';
 import 'package:common/dependencies.dart';
+import 'package:core/util/exception/app_exception.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/dictionary/place_selector_screen.dart';
+import 'package:kmpo_invent/screens/objects/inspect_added_object_screen.dart';
+import 'package:kmpo_invent/utils/date.dart';
 
 import '../dictionary/user_selector_screen.dart';
 
@@ -68,6 +68,8 @@ class _ScanEditStatePage extends State<ScanEditScreen> {
                             controller: _numberField,
                             decoration: const InputDecoration(
                               hintText: "M000000145623",
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(16, 16, 16, 16),
                             ),
                             validator: (value) {
                               if (value.isNullOrEmpty()) {
@@ -100,6 +102,8 @@ class _ScanEditStatePage extends State<ScanEditScreen> {
                             controller: _nameField,
                             decoration: const InputDecoration(
                               hintText: "Коммутатор Cisco",
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(16, 16, 16, 16),
                             ),
                             validator: (value) {
                               if (value.isNullOrEmpty()) {
@@ -148,6 +152,8 @@ class _ScanEditStatePage extends State<ScanEditScreen> {
                             ],
                             decoration: const InputDecoration(
                               hintText: "155",
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(16, 16, 16, 16),
                             ),
                             validator: (value) {
                               if (value.isNullOrEmpty()) {

@@ -25,8 +25,6 @@ class _PlacesScreenState extends State<PlacesScreen> {
           style: TextStyle(
               fontFamily: 'Oswald', fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.green,
-        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.add),

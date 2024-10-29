@@ -1,6 +1,6 @@
-import 'package:kmpo_invent/services/qr.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:flutter/material.dart';
+import 'package:kmpo_invent/services/qr.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class InspectAddedObjectScreen extends StatefulWidget {

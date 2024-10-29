@@ -66,8 +66,6 @@ class _EndStatePageInvent extends State<EndInventScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.green,
-        centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body: Center(

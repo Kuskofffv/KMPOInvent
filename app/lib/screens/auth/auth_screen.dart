@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:core/util/globals.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:core/util/simple.dart';
+import 'package:core/util/theme/theme_util.dart';
 import 'package:flutter/material.dart';
 import 'package:kmpo_invent/domain/const.dart';
 import 'package:kmpo_invent/domain/user.dart';
@@ -50,17 +51,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
           obscureText: obscure,
           style: const TextStyle(fontSize: 20),
           decoration: InputDecoration(
-            hintStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black26),
             hintText: hint,
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 3),
-            ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black45, width: 1),
-            ),
             prefixIcon: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: IconTheme(
@@ -76,10 +67,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
     Widget _button(String text, void Function() func) {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
+          backgroundColor: ThemeUtil.accent,
         ),
         onPressed: func,
         child: Text(
@@ -127,9 +115,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
                     child: const Text(
                       "Забыл пароль?",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
+                      style: TextStyle(fontSize: 16, color: ThemeUtil.black80),
                     ),
                     onTap: () async {
                       final email = await SRRouter.push<String>(
@@ -235,8 +221,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
                                 "Ещё не зарегистрированы?\nПройдите регистрацию!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                                    fontSize: 16, color: ThemeUtil.black80),
                               ),
                             ),
                             onTap: () {
@@ -257,8 +242,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
                                 "Уже зарегистрированны?\nВойдите",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 16,
-                                ),
+                                    fontSize: 16, color: ThemeUtil.black80),
                               ),
                             ),
                             onTap: () {

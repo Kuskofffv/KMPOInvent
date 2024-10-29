@@ -6,6 +6,7 @@ import 'package:core/util/exception/app_exception.dart';
 import 'package:core/util/extension/extensions.dart';
 import 'package:core/util/routing/router.dart';
 import 'package:core/util/simple.dart';
+import 'package:core/util/theme/theme_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -219,7 +220,10 @@ class _InventScreenState extends State<InventScreen> {
                                 .pop(countField.text.toIntOrNull());
                           },
                           decoration: const InputDecoration(
-                              labelText: 'Кол-во', hintText: '10'),
+                            labelText: 'Кол-во',
+                            hintText: '10',
+                            contentPadding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                          ),
                         ))
                       ],
                     ),
@@ -277,7 +281,7 @@ class _InventScreenState extends State<InventScreen> {
           for (final item in list) {
             final number = item.stringOpt("number") ?? "";
             if (objectColors[number] == null) {
-              objectColors[number] = Colors.black54;
+              objectColors[number] = ThemeUtil.black80;
               objects.add(item.toJson());
               objectCounts[number] = 0;
             }

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 /// ThemeUtil is a utility class that provides methods
 /// to create custom themes for buttons.
-class ThemeUtil {
+class UIUtil {
   /// Private constructor to prevent instantiation.
-  ThemeUtil._();
+  UIUtil._();
 
   /// Creates a theme for an ElevatedButton with the given parameters.
   ///

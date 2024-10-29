@@ -1,4 +1,5 @@
 import 'package:core/util/exception/app_exception.dart';
+import 'package:core/util/theme/theme_util.dart';
 import 'package:kmpo_invent/screens/archive/invent_info_screen.dart';
 import 'package:kmpo_invent/utils/date.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
@@ -40,7 +41,7 @@ class _InventListStatePage extends State<InventListScreen> {
             final data = snapshot.data[index];
             final list = data.get<Map>("list") ?? {};
             return Card(
-              color: list.isNotEmpty ? Colors.red : Colors.green,
+              color: list.isNotEmpty ? ThemeUtil.red : ThemeUtil.green,
               child: ListTile(
                 leading: const Icon(
                   Icons.inventory,

@@ -1,5 +1,6 @@
 import 'package:core/util/exception/app_exception.dart';
 import 'package:core/util/routing/router.dart';
+import 'package:core/util/theme/theme_util.dart';
 import 'package:flutter/material.dart';
 import 'package:kmpo_invent/domain/user.dart';
 import 'package:kmpo_invent/screens/objects/inspect_added_object_screen.dart';
@@ -132,13 +133,8 @@ class _ScanMainScreenState extends State<ScanMainScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                      child: const Text(
-                        "Удалить объект",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ThemeUtil.black80),
                       onPressed: () {
                         AppUtil.areYouSure(context,
                             title: "Удаление",
@@ -157,7 +153,14 @@ class _ScanMainScreenState extends State<ScanMainScreen> {
                             SRRouter.pop(context);
                           }
                         });
-                      }),
+                      },
+                      child: const Text(
+                        "Удалить объект",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      )),
                 ],
               ),
             ));

@@ -10,8 +10,6 @@ class AboutPage extends StatelessWidget {
           style: TextStyle(
               fontFamily: 'Oswald', fontSize: 26, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.green,
-        centerTitle: true,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

@@ -1,3 +1,4 @@
+import 'package:core/util/theme/theme_util.dart';
 import 'package:kmpo_invent/utils/date.dart';
 import 'package:core/core_dependencies.dart';
 import 'package:flutter/material.dart';
@@ -15,20 +16,13 @@ class ScanInfoScreen extends StatefulWidget {
 class _ScanInfoScreenState extends State<ScanInfoScreen> {
   Widget _buildRow(String title, String? data, Icon icon) {
     return Column(children: <Widget>[
-      Text(
-        title,
-        style: const TextStyle(
-          fontSize: 21,
-          fontFamily: 'Oswald',
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      Text(title),
       const SizedBox(
         height: 20,
       ),
       Container(
         padding: const EdgeInsets.all(10),
-        color: const Color.fromARGB(14, 0, 255, 34),
+        color: ThemeUtil.black80.withOpacity(0.1),
         child: Row(
           children: [
             icon,
@@ -126,7 +120,7 @@ class _ScanInfoDynamicScreenState extends State<ScanInfoDynamicScreen> {
       ),
       Container(
         padding: const EdgeInsets.all(10),
-        color: const Color.fromARGB(14, 0, 255, 34),
+        color: ThemeUtil.black80.withOpacity(0.1),
         child: Row(
           children: [
             icon,

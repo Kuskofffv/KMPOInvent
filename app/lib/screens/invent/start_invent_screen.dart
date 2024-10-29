@@ -30,14 +30,7 @@ class _InventStartScreenState extends State<InventStartScreen> {
         appBar: AppBar(
           title: const Text(
             'Инвентаризация',
-            style: TextStyle(
-              fontSize: 21,
-              fontFamily: 'Oswald',
-              fontWeight: FontWeight.bold,
-            ),
           ),
-          backgroundColor: Colors.green,
-          centerTitle: true,
         ),
         body: LoaderWidget(operation: () {
           return parseFunc("usernames");
