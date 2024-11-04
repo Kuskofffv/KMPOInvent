@@ -11,10 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:kmpo_invent/domain/user.dart';
+import 'package:kmpo_invent/screens/calendar/calendar_util.dart';
 import 'package:kmpo_invent/screens/scan/scan_info_screen.dart';
 import 'package:kmpo_invent/utils/date.dart';
 import 'package:kmpo_invent/utils/util.dart';
 import 'package:kmpo_invent/widget/loader_widget.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -25,8 +27,13 @@ import 'end_invent_screen.dart';
 class InventScreen extends StatefulWidget {
   final List<String> names;
   final List<DynamicModel> objects;
+  final int? calendarEventId;
 
-  const InventScreen({required this.names, required this.objects, Key? key})
+  const InventScreen(
+      {required this.names,
+      required this.objects,
+      required this.calendarEventId,
+      Key? key})
       : super(key: key);
 
   @override
@@ -38,6 +45,7 @@ class _InventScreenState extends State<InventScreen> {
   Map<String, int> objectCounts = {};
   Map<String, Color?> objectColors = {};
   List<dynamic> objects = [];
+  List<DynamicModel> scannedObjects = [];
   late final DateTime _startDate;
   List<DynamicModel>? _items;
   final _controller = AutoScrollController();
@@ -123,8 +131,19 @@ class _InventScreenState extends State<InventScreen> {
                   return;
                 }
 
+                _saveLastAccountDates();
+
                 toast("Инвентаризация завершена",
                     backgroundColor: Const.red, textColor: Colors.white);
+
+                if (widget.calendarEventId != null) {
+                  final events = await CalendarUtil.storage.read() ?? [];
+                  // ignore: cascade_invocations
+                  events.removeWhere(
+                      (e) => e.intOpt("id") == widget.calendarEventId);
+                  await CalendarUtil.storage.write(events);
+                  await CalendarUtil.scheduleAll();
+                }
 
                 await SRRouter.pushReplacement(
                     context,
@@ -178,24 +197,6 @@ class _InventScreenState extends State<InventScreen> {
 
               unawaited(_controller.scrollToIndex(_items!.indexOf(item),
                   preferPosition: AutoScrollPosition.begin));
-
-              // if (result.rawContent != number) {
-              //   setState(() {
-              //     if (!objectCounts.containsKey(number)) {
-              //       objectCounts[number] = 0;
-              //     }
-              //     objectColors[number] = Colors.red;
-              //   });
-              //   unawaited(Fluttertoast.showToast(
-              //       msg: "Вы отсканировали не тот QR-Code",
-              //       toastLength: Toast.LENGTH_SHORT,
-              //       gravity: ToastGravity.BOTTOM,
-              //       timeInSecForIosWeb: 3,
-              //       backgroundColor: Colors.red,
-              //       textColor: Colors.white,
-              //       fontSize: 16));
-              //   return;
-              // }
 
               final TextEditingController countField =
                   TextEditingController(text: "1");
@@ -254,11 +255,13 @@ class _InventScreenState extends State<InventScreen> {
                     objectCounts.remove(result.rawContent);
                   }
                   objectColors[result.rawContent] = Colors.green;
+                  scannedObjects.add(item);
                 });
               } else {
                 setState(() {
                   objectCounts[result.rawContent] = scanned;
                   objectColors[result.rawContent] = Colors.red;
+                  scannedObjects.remove(item);
                 });
 
                 toast(
@@ -327,5 +330,39 @@ class _InventScreenState extends State<InventScreen> {
         }),
       ),
     );
+  }
+
+  // ignore: avoid_void_async
+  void _saveLastAccountDates() async {
+    final query = QueryBuilder<ParseObject>(ParseObject('Objects'))
+      ..setLimit(1000);
+    final response = await query.query();
+
+    if (!response.success) {
+      return;
+    }
+
+    final list = List<ParseObject>.from(response.results ?? []);
+
+    final map = <String, ParseObject>{};
+    for (final parseObject in list) {
+      map[parseObject.objectId!] = parseObject;
+    }
+
+    final savingParseObjects = scannedObjects.mapNotNull(
+      (e) {
+        final id = e.stringOpt("objectId");
+        if (id != null) {
+          final parseObject = map[id];
+          if (parseObject != null) {
+            parseObject.set("last_accounting_date",
+                DateFormatUtil.strFromDate(DateTime.now()));
+            return parseObject;
+          }
+        }
+      },
+    );
+
+    await Future.wait(savingParseObjects.map((e) => e.save()));
   }
 }

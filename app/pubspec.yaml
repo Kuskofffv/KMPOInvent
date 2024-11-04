@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none'
 
-version: 1.0.4
+version: 1.0.5
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -36,9 +36,9 @@ dependencies:
   pdf: ^3.11.1
   scroll_to_index: ^3.0.1
   flutter_local_notifications: ^17.2.3
-  flutter_neat_and_clean_calendar: ^0.4.15
   timezone: 0.9.4
   flutter_timezone: 2.0.1
+  flutter_platform_widgets: ^7.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0

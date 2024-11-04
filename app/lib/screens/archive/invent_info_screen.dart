@@ -59,7 +59,7 @@ class _InventInfoScreenState extends State<InventInfoScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Инвентаризация пройдена: ${DateFormatUtil.strFromDate(widget.parseObject.createdAt, formatter: "dd.MM.yyyy HH:mm")}',
+                'Инвентаризация пройдена\n${DateFormatUtil.strFromDate(widget.parseObject.createdAt, formatter: "dd.MM.yyyy HH:mm")}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
                 textAlign: TextAlign.center,

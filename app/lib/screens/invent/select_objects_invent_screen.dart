@@ -9,8 +9,12 @@ import 'package:kmpo_invent/widget/loader_widget.dart';
 class SelectObjectsInventScreen extends StatefulWidget {
   final List<String> names;
   final List<String> mols;
+  final int? calendarEventId;
   const SelectObjectsInventScreen(
-      {required this.names, required this.mols, Key? key})
+      {required this.names,
+      required this.mols,
+      required this.calendarEventId,
+      Key? key})
       : super(key: key);
 
   @override
@@ -97,8 +101,12 @@ class _SelectObjectsInventScreenState extends State<SelectObjectsInventScreen> {
                       if (_checked.isEmpty) {
                         return;
                       }
-                      SRRouter.pushReplacement(context,
-                          InventScreen(names: widget.names, objects: _checked));
+                      SRRouter.pushReplacement(
+                          context,
+                          InventScreen(
+                              names: widget.names,
+                              objects: _checked,
+                              calendarEventId: widget.calendarEventId));
                     },
                     child: const Text("Начать инвентаризацию")),
               )

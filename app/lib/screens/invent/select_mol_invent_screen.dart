@@ -100,7 +100,9 @@ class _SelectMolInventScreenState extends State<SelectMolInventScreen> {
                         SRRouter.pushReplacement(
                             context,
                             SelectObjectsInventScreen(
-                                names: widget.names, mols: _checked));
+                                names: widget.names,
+                                mols: _checked,
+                                calendarEventId: null));
                       }
                     },
                     child: const Text("Выбрать")),

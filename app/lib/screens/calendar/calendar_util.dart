@@ -86,6 +86,7 @@ abstract class CalendarUtil {
             SelectObjectsInventScreen(
               names: event.stringListOpt('comission') ?? [],
               mols: event.stringListOpt('mols') ?? [],
+              calendarEventId: event.intOpt('id'),
             )));
       }
     });

@@ -55,15 +55,12 @@ android {
             storeFile file("../invent.jks")
             storePassword "invent"
         }
-     //   debug {
-     //       keyAlias "invent"
-     //       keyPassword "invent"
-     //       storeFile file("../invent.jks")
-     //       storePassword "invent"
-     //   }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
             signingConfig signingConfigs.release
         }
