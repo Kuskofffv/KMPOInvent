@@ -42,7 +42,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/20.jpg',
+                "assets/images/20.png",
                 scale: 2,
               ),
               const SizedBox(
@@ -56,7 +56,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/new/22.jpg',
+                'assets/images/22.png',
                 scale: 2,
               ),
               const SizedBox(
@@ -83,7 +83,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/23.jpg',
+                'assets/images/23.png',
                 scale: 2,
               ),
 
@@ -107,7 +107,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/38.jpg',
+                'assets/images/38.png',
                 scale: 2,
               ),
 
@@ -122,7 +122,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/25.jpg',
+                'assets/images/25.png',
                 scale: 2,
               ),
               const SizedBox(
@@ -140,7 +140,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/42.jpg',
+                'assets/images/42.png',
                 scale: 2,
               ),
 
@@ -156,7 +156,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/44.jpg',
+                'assets/images/44.png',
                 scale: 2,
               ),
 
@@ -182,14 +182,14 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/24.jpg',
+                'assets/images/24.png',
                 scale: 2,
               ),
               const SizedBox(
                 height: 30,
               ),
               Image.asset(
-                'assets/images/26.jpg',
+                'assets/images/26.png',
                 scale: 2,
               ),
 
@@ -215,7 +215,7 @@ class AboutPage extends StatelessWidget {
                 height: 30,
               ),
               Image.asset(
-                'assets/images/28.jpg',
+                'assets/images/28.png',
                 scale: 2,
               ),
               const SizedBox(

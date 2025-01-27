@@ -70,6 +70,29 @@ flutter:
     - assets/images/11.png
     - assets/images/12.png
     - assets/images/13.png
+    - assets/images/icona.png
+    - assets/images/20.png
+    - assets/images/22.png
+    - assets/images/23.png
+    - assets/images/24.png
+    - assets/images/25.png
+    - assets/images/26.png
+    - assets/images/28.png
+    - assets/images/30.png
+    - assets/images/32.png
+    - assets/images/33.png
+    - assets/images/34.png
+    - assets/images/35.png
+    - assets/images/36.png
+    - assets/images/37.png
+    - assets/images/38.png
+    - assets/images/40.png
+    - assets/images/41.png
+    - assets/images/42.png
+    - assets/images/44.png
+    - assets/images/45.png
+    - assets/images/46.png
+    - assets/images/47.png
 
   fonts:
     - family: Roboto   
