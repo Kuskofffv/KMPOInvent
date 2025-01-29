@@ -69,13 +69,13 @@ class _InventInfoScreenState extends State<InventInfoScreen> {
               ),
               if (widget.listObj.isNotEmpty)
                 Text(
-                  'Участие в инвентаризации принимали: ${widget.names}.\nК сожалению, по завершению работы была выявлена недосдача. Было недосчитано ${listObj.length} ${Intl.plural(listObj.length, one: "объект", few: "объекта", other: "объектов")}.\nВот их инвентарные номера ($remainNumbers).',
+                  'Участие в инвентаризации принимали: ${widget.names}.\n\nПо результатам проверки были выявлены необнаруженные объекты в количестве ${listObj.length} ${Intl.plural(listObj.length, one: "объект", few: "объекта", other: "объектов")}.\n\nИх инвентарные номера ($remainNumbers).',
                   style: const TextStyle(fontSize: 16),
                   textAlign: TextAlign.center,
                 )
               else
                 Text(
-                    'Участие в инвентаризации принимали: ${widget.names}.\nРезультат получился успешный.',
+                    'Участие в инвентаризации принимали: ${widget.names}.\n\nПо результатам проверки все объекты успешно найдены.',
                     style: const TextStyle(fontSize: 16),
                     textAlign: TextAlign.center),
               const SizedBox(
@@ -88,7 +88,7 @@ class _InventInfoScreenState extends State<InventInfoScreen> {
                       user!, workbook, widget.id!, widget.parseObject);
                 },
                 child: const Text(
-                  'Открыть таблицу',
+                  'Открыть акт инвентаризации',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

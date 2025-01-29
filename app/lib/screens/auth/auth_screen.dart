@@ -113,7 +113,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: GestureDetector(
                     child: const Text(
-                      "Забыл пароль?",
+                      "Забыли пароль?",
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: 16, color: ThemeUtil.black80),
                     ),
@@ -172,7 +172,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
       }
 
       if (!regExpMail.hasMatch(email)) {
-        toast("Неверная почта",
+        toast("Неверный адрес эл.почты",
             backgroundColor: Const.red, textColor: Colors.white);
         return;
       }
@@ -239,7 +239,7 @@ class _AuthorizationState extends State<AuthorizationPage> {
                             child: const Padding(
                               padding: EdgeInsets.all(10),
                               child: Text(
-                                "Уже зарегистрированны?\nВойдите",
+                                "Уже зарегистрированы?\nВойдите",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 16, color: ThemeUtil.black80),

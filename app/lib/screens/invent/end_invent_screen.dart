@@ -87,13 +87,13 @@ class _EndStatePageInvent extends State<EndInventScreen> {
               // ignore: prefer_if_elements_to_conditional_expressions
               if (remainNumbers != null)
                 Text(
-                  'К сожалению, в процессе проведения инвентаризации у вас выявилась недосдача. \nИз ${(countObj!).round()} инвентарных преметов, было недосчитано ${listObj.length} ${Intl.plural(listObj.length, one: "объект", few: "объекта", other: "объектов")}.\nВот их инвентарные номера ($remainNumbers)',
+                  'По результатам проверки были выявлены необнаруженные объекты в количестве ${listObj.length} ${Intl.plural(listObj.length, one: "объект", few: "объекта", other: "объектов")}.\n\nИх инвентарные номера ($remainNumbers).',
                   style: const TextStyle(fontSize: 16),
                   textAlign: TextAlign.center,
                 )
               else
                 const Text(
-                    'Все инвентарные объекты были найдены и отсканированны.',
+                    'По результатам проверки все объекты успешно найдены.',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center),
               const SizedBox(
@@ -115,7 +115,7 @@ class _EndStatePageInvent extends State<EndInventScreen> {
                               user!, workbook, time!, widget.parseObject);
                         },
                         child: const Text(
-                          'Открыть таблицу',
+                          'Открыть акт инвентаризации',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
