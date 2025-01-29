@@ -14,6 +14,7 @@
 - Настройка push-уведомлений с информацией о планируемых инвентаризациях
 и многое другое...
 
+
 Скриншоты работы приложения:
 
 ![изображение](https://github.com/Kuskofffv/KMPOInvent/blob/master/app/assets/images/20.png)
